@@ -1,0 +1,60 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 100px 0;
+  }
+  
+  .logo-img {
+    height: 80px;
+  }
+  
+  .nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 110px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #058c42;
+  }
+  
+  .auth-group {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .login-link a {
+    color: #666;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .signup-btn {
+    background-color: #2d7a2d;
+    color: white;
+    border: none;
+    padding: 6px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }  

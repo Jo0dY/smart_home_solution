@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import Navbar from './Navbar';  // ✅ 같은 폴더에 있을 경우
 
 function Login() {
   const navigate = useNavigate();
@@ -11,27 +12,33 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <h1 className="login-title">로그인</h1>
-      <form className="login-form" onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="이메일 아이디를 입력하세요"
-          className="login-input"
-          required
-        />
-        <input
-          type="password"
-          placeholder="비밀번호 (영문, 숫자, 특수문자 조합 8~16자리)"
-          className="login-input"
-          required
-        />
-        <button type="submit" className="login-button">로그인</button>
-      </form>
-      <div className="login-links">
-        <span onClick={() => navigate('/Signup')}>회원가입</span>
-        <span>|</span>
-        <span onClick={() => navigate('/find-account')}>아이디/비밀번호 찾기</span>
+    <div>
+      {/* ✅ 여기! 네비게이션 추가 위치 정확히 이곳 */}
+      <Navbar />  
+
+      {/* 로그인 폼 전체 */}
+      <div className="login-container">
+        <h1 className="login-title">로그인</h1>
+        <form className="login-form" onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="이메일 아이디를 입력하세요"
+            className="login-input"
+            required
+          />
+          <input
+            type="password"
+            placeholder="비밀번호 (영문, 숫자, 특수문자 조합 8~16자리)"
+            className="login-input"
+            required
+          />
+          <button type="submit" className="login-button">로그인</button>
+        </form>
+        <div className="login-links">
+          <span onClick={() => navigate('/Signup')}>회원가입</span>
+          <span>|</span>
+          <span onClick={() => navigate('/find-account')}>아이디/비밀번호 찾기</span>
+        </div>
       </div>
     </div>
   );
