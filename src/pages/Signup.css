@@ -1,0 +1,171 @@
+:root {
+  --main-green: #4caf50;
+  --dark-green: #388e3c;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+/* 전체 가로 너비 사용 및 중앙 정렬 제거 */
+.register-container {
+  width: 100%;
+  padding: 50px 10%;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.register-title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.tab-buttons button {
+  flex: 1;
+  padding: 15px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background: white;
+  font-size: 16px;
+  cursor: pointer;
+  max-width: 250px;
+}
+
+.tab-buttons .active {
+  border: 2px solid var(--main-green);
+  font-weight: bold;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+input,
+select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  flex: 1;
+}
+
+.phone-inputs,
+.biznum-inputs {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-sub {
+  padding: 10px 14px;
+  background-color: var(--main-green);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  height: 42px;
+}
+
+.btn-sub.small {
+  padding: 8px 12px;
+  font-size: 13px;
+  height: 36px;
+}
+
+.btn-sub:hover {
+  background-color: var(--dark-green);
+}
+
+.minor-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.policy-buttons-inline {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.policy-text-btn {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #333;
+  white-space: nowrap;
+}
+
+.policy-text-btn:hover {
+  border-color: var(--main-green);
+  color: var(--main-green);
+}
+
+.register-button-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.register-submit {
+  padding: 12px 40px;
+  background-color: var(--main-green);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: fit-content;
+  align-self: center;
+}
+
+.register-submit:hover {
+  background-color: var(--dark-green);
+}
+
+/* 사업자등록번호 입력 줄 균등 너비 */
+.biznum-inputs input {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.biznum-inputs span {
+  white-space: nowrap;
+}
+
+.biznum-inputs button {
+  height: 42px;
+  flex-shrink: 0;
+}

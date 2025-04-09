@@ -1,0 +1,327 @@
+/* 기본 설정 */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.home-container {
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 100px 0;
+}
+
+.logo-img {
+  height: 80px;
+}
+
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 110px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #058c42;
+}
+
+.auth-group {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.login-link a {
+  color: #666;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.signup-btn {
+  background-color: #2d7a2d;
+  color: white;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.main-content {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  min-height: 800px;
+  background: linear-gradient(to bottom, #ffffff 0%, #f2faee 50%, #e8f8e4 100%);
+}
+
+.main-left {
+  flex: 1;
+  margin-left: 70px;
+  z-index: 1;
+}
+
+.main-left h1 {
+  font-size: 49px;
+  font-weight: 900;
+  color: #333;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.highlight {
+  color: #e18401;
+  font-weight: bold;
+}
+
+.start-button {
+  width: 190px;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.main-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 60px;
+}
+
+.flower-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.flower-img {
+  width: 700px;
+  animation: sway 3s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1.5deg); }
+  75% { transform: rotate(-1.5deg); }
+}
+
+.jibom-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: -195px;
+  margin-left: 147px;
+}
+
+.jibom-img {
+  width: 80px;
+  animation: jibomWalk 0.4s steps(2) infinite;
+}
+
+@keyframes jibomWalk {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(1px); }
+}
+
+.solution-feature-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px 20px;
+  padding: 60px 200px;
+  justify-items: center;
+  margin-bottom: 200px;
+  cursor: pointer;
+}
+
+.feature-card {
+  background-color: white;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 500px;
+  height: 290px;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  transition: transform 0.3s ease, background 0.3s ease;
+  font-weight: bold;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, #e8f8e4 0%, #03ff75 100%);
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.feature-img {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.arrow-icon {
+  width: 50px;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.device-section {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.device-img-wrapper {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.device-img {
+  width: 600px;
+  height: auto;
+  transition: transform 0.3s ease;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 150px;
+
+}
+
+.device-list {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 640px;
+  background: #ffffffd9;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  min-width: 220px;
+}
+
+.device-img-wrapper:hover .device-list {
+  opacity: 1;
+}
+
+.device-img-wrapper:hover {
+  transform: translateX(-160px);
+}
+
+device-list h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+  font-weight: 700;
+  color: #2d7a2d;
+}
+
+device-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+.jibom-char-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* 가운데 정렬 */
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 20px;
+  max-width: 850px;         /* 폭 줄이기 */
+  margin: 0 auto;           /* 중앙 정렬 */
+}
+
+
+
+
+
+.jibom-explain-section {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 60px 100px;
+}
+
+.jibom-card {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+}
+
+.jibom-icon {
+  width: 80px;
+  margin-right: 20px;
+}
+
+.jibom-text-group h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.jibom-text-group p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+
+.jibom-box {
+  max-width: 600px;
+  width: 90%;
+  background: #fff;
+  border-radius: 28px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.jibom-box img {
+  width: 100px;
+  height: auto;
+}
+
+.jibom-center {
+  justify-content: center;
+}
