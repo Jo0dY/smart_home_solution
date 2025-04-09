@@ -57,8 +57,8 @@ function Home() {
             <li><Link to="/solution">솔루션 기능</Link></li>
             <li><Link to="/notice">공지사항</Link></li>
             <li><Link to="/contact">문의사항</Link></li>
-            <li><Link to="/privacy">개인정보 보호</Link></li>
-          </ul>
+            <li><Link to="/privacy">개인정보 보호</Link></li> {/* ✅ 그대로 유지해도 되고 */}
+            </ul>
         </div>
         <ul className="auth-group">
           <li className="login-link"><Link to="/login">로그인</Link></li>

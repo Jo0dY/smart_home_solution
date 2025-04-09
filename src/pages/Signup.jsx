@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // ✅ 이 줄 추가!
 import './Signup.css';
-
 function SignupPage() {
   
     const [memberType, setMemberType] = useState('company');
