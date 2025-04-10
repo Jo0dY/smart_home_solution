@@ -62,6 +62,29 @@ function SignupPage() {
     }
   };
 
+  // ✅ 인증코드 발송 함수
+  const sendCode = async () => {
+    try {
+      await axios.post('http://localhost:8000/users/send-code', { email });
+      alert('인증코드가 이메일로 전송되었습니다!');
+    } catch (err) {
+      alert('인증코드 전송 실패: ' + (err.response?.data?.detail || '오류'));
+    }
+  };
+
+  // ✅ 인증코드 확인 함수
+  const verifyCode = async () => {
+    try {
+      await axios.post('http://localhost:8000/users/verify-code', {
+        email,
+        code: String(authCode)
+      });
+      alert('이메일 인증 성공!');
+    } catch (err) {
+      alert('인증 실패: ' + (err.response?.data?.detail || '오류'));
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -78,36 +101,34 @@ function SignupPage() {
             <label>아이디*</label>
             <div className="form-row">
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="이메일 입력" required />
-              <button className="btn-sub" type="button">인증코드 발송</button>
+              <button className="btn-sub" type="button" onClick={sendCode}>인증코드 발송</button>
             </div>
             <div className="form-row">
               <input type="text" value={authCode} onChange={(e) => setAuthCode(e.target.value)} placeholder="인증코드 입력" />
-              <button className="btn-sub" type="button">인증하기</button>
+              <button className="btn-sub" type="button" onClick={verifyCode}>인증하기</button>
             </div>
           </div>
 
-          {/* 통신사 + 휴대전화번호 한 줄에 정렬 */}
           <div className="form-group">
-  <label>휴대전화번호</label>
-  <div className="tel-combo-row">
-  <select value={carrier} onChange={(e) => setCarrier(e.target.value)} required>
-  <option value="">통신사</option>
-  <option value="SKT">SKT</option>
-  <option value="KT">KT</option>
-  <option value="LG U+">LG U+</option>
-  <option value="알뜰폰(SKT)">알뜰폰(SKT)</option>
-  <option value="알뜰폰(KT)">알뜰폰(KT)</option>
-  <option value="알뜰폰(LG U+)">알뜰폰(LG U+)</option>
-</select>
-
-    <select value={phone1} onChange={(e) => setPhone1(e.target.value)} required>
-      <option value="">선택</option>
-      <option>010</option>
-    </select>
-    <input type="text" value={phone2} onChange={(e) => setPhone2(e.target.value)} required />
-    <input type="text" value={phone3} onChange={(e) => setPhone3(e.target.value)} required />
-  </div>
-</div>
+            <label>휴대전화번호</label>
+            <div className="tel-combo-row">
+              <select value={carrier} onChange={(e) => setCarrier(e.target.value)} required>
+                <option value="">통신사</option>
+                <option value="SKT">SKT</option>
+                <option value="KT">KT</option>
+                <option value="LG U+">LG U+</option>
+                <option value="알뜰폰(SKT)">알뜰폰(SKT)</option>
+                <option value="알뜰폰(KT)">알뜰폰(KT)</option>
+                <option value="알뜰폰(LG U+)">알뜰폰(LG U+)</option>
+              </select>
+              <select value={phone1} onChange={(e) => setPhone1(e.target.value)} required>
+                <option value="">선택</option>
+                <option>010</option>
+              </select>
+              <input type="text" value={phone2} onChange={(e) => setPhone2(e.target.value)} required />
+              <input type="text" value={phone3} onChange={(e) => setPhone3(e.target.value)} required />
+            </div>
+          </div>
 
           <div className="form-group">
             <label>이름*</label>

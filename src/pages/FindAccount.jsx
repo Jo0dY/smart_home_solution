@@ -6,11 +6,33 @@ import Navbar from './Navbar';
 function FindAccount() {
   const [mode, setMode] = useState('id');
 
-  // 상태값
   const [name, setName] = useState('');
   const [birth, setBirth] = useState('');
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
+
+  // ✅ 인증코드 발송 함수
+  const sendCode = async () => {
+    try {
+      await axios.post('http://localhost:8000/users/send-code', { email });
+      alert('인증코드가 이메일로 전송되었습니다!');
+    } catch (err) {
+      alert('인증코드 전송 실패: ' + (err.response?.data?.detail || '오류'));
+    }
+  };
+
+  // ✅ 인증코드 확인 함수
+  const verifyCode = async () => {
+    try {
+      await axios.post('http://localhost:8000/users/verify-code', {
+        email,
+        code: String(code)
+      });
+      alert('이메일 인증 성공!');
+    } catch (err) {
+      alert('인증 실패: ' + (err.response?.data?.detail || '오류'));
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,7 +90,7 @@ function FindAccount() {
                   이메일*
                   <div className="code-row">
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    <button type="button" className="small-btn">인증코드 발송</button>
+                    <button type="button" className="small-btn" onClick={sendCode}>인증코드 발송</button>
                   </div>
                 </label>
 
@@ -76,7 +98,7 @@ function FindAccount() {
                   인증코드 입력*
                   <div className="code-row">
                     <input type="text" value={code} onChange={(e) => setCode(e.target.value)} />
-                    <button type="button" className="small-btn">확인</button>
+                    <button type="button" className="small-btn" onClick={verifyCode}>확인</button>
                   </div>
                 </label>
               </>
@@ -86,7 +108,7 @@ function FindAccount() {
                   아이디(이메일)*
                   <div className="code-row">
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    <button type="button" className="small-btn">인증코드 발송</button>
+                    <button type="button" className="small-btn" onClick={sendCode}>인증코드 발송</button>
                   </div>
                 </label>
 
@@ -94,7 +116,7 @@ function FindAccount() {
                   인증코드 입력*
                   <div className="code-row">
                     <input type="text" value={code} onChange={(e) => setCode(e.target.value)} />
-                    <button type="button" className="small-btn">확인</button>
+                    <button type="button" className="small-btn" onClick={verifyCode}>확인</button>
                   </div>
                 </label>
               </>
