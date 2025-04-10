@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Home.css';
 import ScrollFeature from './ScrollFeature';
+import { useAuth } from '../contexts/AuthContext'; // ✅ 로그인 상태
 
-
+// 이미지 import
 import logoImg from '../assets/logo.png';
 import buttonImg from '../assets/Button.png';
 import flowerImg from '../assets/main_flower.png';
@@ -17,12 +18,13 @@ import jibomReport from '../assets/jibom_report.png';
 import arrowRight from '../assets/Arrow right-circle.png';
 import devicesImg from '../assets/devices.png';
 
-
 function Home() {
   const [jibomState, setJibomState] = useState('walk1');
   const [jibomLeft, setJibomLeft] = useState(1280);
   const [jibomDone, setJibomDone] = useState(false);
   const navigate = useNavigate();
+
+  const { isLoggedIn, logout } = useAuth(); // ✅ 로그인 여부 확인
 
   useEffect(() => {
     if (jibomDone) return;
@@ -46,7 +48,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      {/* ========== 상단 네비게이션 ========== */}
+      {/* 네비게이션 바 */}
       <nav className="navbar">
         <div className="logo">
           <img src={logoImg} alt="지켜_봄 로고" className="logo-img" />
@@ -57,20 +59,52 @@ function Home() {
             <li><Link to="/solution">솔루션 기능</Link></li>
             <li><Link to="/notice">공지사항</Link></li>
             <li><Link to="/contact">문의사항</Link></li>
-            <li><Link to="/privacy">개인정보 보호</Link></li> {/* ✅ 그대로 유지해도 되고 */}
-            </ul>
+            <li><Link to="/privacy">개인정보 보호</Link></li>
+          </ul>
         </div>
+
         <ul className="auth-group">
-          <li className="login-link"><Link to="/login">로그인</Link></li>
-          <li>
-            <Link to="/signup">
-              <button className="signup-btn">회원가입</button>
-            </Link>
-          </li>
+          {isLoggedIn ? (
+            <>
+              <li className="login-link">안녕하세요!</li>
+              <li>
+                <button
+                  className="signup-btn"
+                  onClick={() => {
+                    const isAppInstalled = localStorage.getItem('app_installed') === 'true';
+                    if (isAppInstalled) {
+                      window.location.href = 'http://localhost:9999/mypage'; // 설치된 앱 열기
+                    } else {
+                      navigate('/install-guide'); // 설치 안내 페이지
+                    }
+                  }}
+                >
+                  마이페이지
+                </button>
+              </li>
+              <li>
+                <button className="signup-btn" onClick={() => {
+                  logout();
+                  navigate('/');
+                }}>
+                  로그아웃
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="login-link"><Link to="/login">로그인</Link></li>
+              <li>
+                <Link to="/signup">
+                  <button className="signup-btn">회원가입</button>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
 
-      {/* ========== 메인 인트로 ========== */}
+      {/* 메인 화면 */}
       <main className="main-content">
         <div className="main-left">
           <h1>
@@ -107,16 +141,12 @@ function Home() {
         </div>
       </main>
 
-      {/* ========== 스크롤 전환 섹션 ========== */}
-      <div style={{ height: '23vh' }}></div>  
+      {/* 스크롤 섹션 */}
+      <div style={{ height: '23vh' }}></div>
+      <ScrollFeature />
+      <div style={{ height: '400vh' }}></div>
 
-      <ScrollFeature />  
-      <div style={{ height: '400vh' }}></div>  
-
-      </div>
-  );
-}
-{/* ====== 기능 소개 Section ====== */}
+      {/* 기능 소개 섹션 */}
       <section id="function-img" className="solution-feature-section">
         <div className="feature-card">
           <h3>취약점 분석</h3>
@@ -140,15 +170,11 @@ function Home() {
         </div>
       </section>
 
-      {/* ====== 사용 가능 기기 Section ====== */}
+      {/* 사용 가능 기기 섹션 */}
       <section className="detail-image-section" id="devices-img">
         <div className="device-section">
           <div className="device-img-wrapper">
-            <img
-              src={devicesImg}
-              alt="사용 가능 기기 이미지"
-              className="device-img"
-            />
+            <img src={devicesImg} alt="사용 가능 기기 이미지" className="device-img" />
             <div className="device-list">
               <h2>사용 가능 기기</h2>
               <ul>
@@ -162,4 +188,8 @@ function Home() {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+
 export default Home;

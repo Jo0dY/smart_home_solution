@@ -1,81 +1,151 @@
-/* Find.css */
+:root {
+  --main-green: #5cb85c;
+  --dark-green: #4cae4c;
+}
 
 body, html {
   margin: 0;
   padding: 0;
-  height: 100%;
   background-color: #fff;
-  font-family: sans-serif;
+  font-family: 'sans-serif';
 }
 
 .find-container {
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center; /* 제목 + 폼 모두 가운데 정렬 */
-  padding: 0 20px;
+  align-items: center;
+  padding: 40px 20px;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .find-title {
-  font-size: 40px;
+  font-size: 36px;
   font-weight: bold;
+  margin-bottom: 40px;
   text-align: center;
-  margin-bottom: 50px;
 }
 
 .tab-buttons {
   display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 500px;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 40px;
 }
 
 .tab-buttons button {
-  flex: 1;
-  padding: 18px;
+  width: 200px;    /* 👉 가로 길이 정확히 200px */
+  height: 60px;  
+  padding: 18px 40px;
   font-size: 18px;
   border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  background-color: #f9f9f9;
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  min-width: 180px;
 }
 
-.tab-buttons button.active {
+.tab-buttons .active {
   background-color: var(--main-green);
-  color: #fff;
+  color: white;
   border: none;
   font-weight: bold;
 }
 
-.find-form {
+.auth-form {
   width: 100%;
-  max-width: 500px;
+  max-width: 800px; /* 👉 원래 500px일 수도 있음 */
+  margin: 0 auto;   /* 가운데 정렬 유지 */
+  padding-bottom: 80px;
+}
+
+
+.auth-form h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.form-line {
+  height: 2px;
+  background-color: #000;
+  margin-bottom: 30px;
+}
+
+.auth-form form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
 }
 
-.find-input {
-  padding: 18px;
-  font-size: 17px;
+.auth-form label {
+  font-weight: bold;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form input,
+.auth-form select {
+  padding: 14px;
+  margin-top: 6px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.find-button {
-  padding: 18px;
-  font-size: 18px;
+.phone-input-row,
+.code-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.phone-input-row select,
+.phone-input-row input,
+.code-row input {
+  flex: 1;
+}
+
+.small-btn {
+  height: 46px;
+  padding: 0 16px;
+  background-color: #999;
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.small-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.bottom-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.main-action-btn {
+  width: 200px;
+  height: 50px;
   background-color: var(--main-green);
   color: white;
+  font-size: 18px;
+  font-weight: bold;
   border: none;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.find-button:hover {
+.main-action-btn:hover {
   background-color: var(--dark-green);
-}  
+}

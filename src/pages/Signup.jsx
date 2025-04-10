@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Signup.css';
-import Navbar from './Navbar'; // HEAD 쪽에서 유지
+import Navbar from './Navbar';
 
 function SignupPage() {
   const [memberType, setMemberType] = useState('company');
@@ -16,6 +16,7 @@ function SignupPage() {
   const [phone1, setPhone1] = useState('');
   const [phone2, setPhone2] = useState('');
   const [phone3, setPhone3] = useState('');
+  const [carrier, setCarrier] = useState('');
   const [birth, setBirth] = useState('');
   const [under14, setUnder14] = useState(false);
   const [companyName, setCompanyName] = useState('');
@@ -44,6 +45,7 @@ function SignupPage() {
       password,
       name,
       phone,
+      carrier,
       birth: memberType === 'personal' ? birth : null,
       under14: memberType === 'personal' ? under14 : false,
       company_name: memberType === 'company' ? companyName : '',
@@ -52,7 +54,6 @@ function SignupPage() {
 
     try {
       const response = await axios.post('http://127.0.0.1:8000/users/signup', formData);
-      console.log('회원가입 성공:', response.data);
       alert('회원가입이 완료되었습니다!');
       navigate('/login');
     } catch (err) {
@@ -73,7 +74,6 @@ function SignupPage() {
         </div>
 
         <form className="register-form" onSubmit={handleSubmit}>
-          {/* 이메일 */}
           <div className="form-group">
             <label>아이디*</label>
             <div className="form-row">
@@ -86,21 +86,29 @@ function SignupPage() {
             </div>
           </div>
 
-          {/* 휴대전화 */}
+          {/* 통신사 + 휴대전화번호 한 줄에 정렬 */}
           <div className="form-group">
-            <label>휴대전화번호*</label>
-            <div className="phone-inputs">
-              <select value={phone1} onChange={(e) => setPhone1(e.target.value)} required>
-                <option value="">선택</option>
-                <option>010</option>
-                <option>011</option>
-              </select>
-              <input type="text" value={phone2} onChange={(e) => setPhone2(e.target.value)} required />
-              <input type="text" value={phone3} onChange={(e) => setPhone3(e.target.value)} required />
-            </div>
-          </div>
+  <label>휴대전화번호</label>
+  <div className="tel-combo-row">
+  <select value={carrier} onChange={(e) => setCarrier(e.target.value)} required>
+  <option value="">통신사</option>
+  <option value="SKT">SKT</option>
+  <option value="KT">KT</option>
+  <option value="LG U+">LG U+</option>
+  <option value="알뜰폰(SKT)">알뜰폰(SKT)</option>
+  <option value="알뜰폰(KT)">알뜰폰(KT)</option>
+  <option value="알뜰폰(LG U+)">알뜰폰(LG U+)</option>
+</select>
 
-          {/* 이름, 비밀번호 */}
+    <select value={phone1} onChange={(e) => setPhone1(e.target.value)} required>
+      <option value="">선택</option>
+      <option>010</option>
+    </select>
+    <input type="text" value={phone2} onChange={(e) => setPhone2(e.target.value)} required />
+    <input type="text" value={phone3} onChange={(e) => setPhone3(e.target.value)} required />
+  </div>
+</div>
+
           <div className="form-group">
             <label>이름*</label>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -116,7 +124,6 @@ function SignupPage() {
             <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
           </div>
 
-          {/* 개인회원: 생년월일 + 만14세 */}
           {memberType === 'personal' && (
             <div className="form-group">
               <label>생년월일*</label>
@@ -131,7 +138,6 @@ function SignupPage() {
             </div>
           )}
 
-          {/* 기업회원: 회사명, 사업자등록번호 */}
           {memberType === 'company' && (
             <>
               <div className="form-group">
@@ -152,7 +158,6 @@ function SignupPage() {
             </>
           )}
 
-          {/* 약관 보기 */}
           <div className="form-group">
             <div className="policy-buttons-inline">
               <button type="button" className="policy-text-btn" onClick={() => navigate('/policy')}>개인정보처리방침 보기</button>
