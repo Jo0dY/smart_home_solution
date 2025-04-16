@@ -1,0 +1,115 @@
+/* 전체 관리자 문의 컨테이너 */
+.admin-inquiry-container {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 20px;
+    font-family: 'Pretendard', sans-serif;
+  }
+  
+  /* 제목 */
+  .admin-inquiry-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #13793d;
+  }
+  
+  /* 테이블 스타일 */
+  .admin-inquiry-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .admin-inquiry-table th,
+  .admin-inquiry-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    font-size: 15px;
+  }
+  
+  .admin-inquiry-table th {
+    background-color: #f6f6f6;
+    font-weight: 600;
+  }
+  
+  /* 행 hover */
+  .inquiry-row:hover {
+    background-color: #f0f8ff;
+    cursor: pointer;
+  }
+  
+  /* 확장된 답변 영역 */
+  .expanded-box {
+    padding: 20px;
+    background-color: #fbfbfb;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .readonly-text {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    background-color: #f7f7f7;
+  }
+  
+  /* 답변 작성 영역 */
+  .answer-section label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .answer-section textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+    font-size: 14px;
+  }
+  
+  /* 버튼 그룹 */
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .button-group button {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .button-group button:hover {
+    opacity: 0.9;
+  }
+  
+  /* 버튼 개별 스타일 */
+  .button-group .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .button-group button:not(.delete-btn) {
+    background-color: #3498db;
+    color: white;
+  }
+  

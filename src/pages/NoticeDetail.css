@@ -1,0 +1,65 @@
+.notice-detail-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+}
+
+.notice-detail-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.notice-detail-date {
+  font-size: 0.9em;
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.notice-detail-content {
+  font-size: 1.1em;
+  white-space: pre-wrap;
+  margin-bottom: 30px;
+}
+
+.notice-detail-buttons {
+  margin-bottom: 20px;
+}
+
+.notice-detail-buttons button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  background-color: #ff6868;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.notice-detail-buttons button:first-child {
+  background-color: #4caf50;
+}
+
+/* ✅ 추가된 hover 효과 */
+.notice-detail-buttons button:hover {
+  opacity: 0.9;
+}
+
+/* ✅ 추가된 반응형 스타일 */
+@media (max-width: 600px) {
+  .notice-detail-container {
+    padding: 16px;
+  }
+
+  .notice-detail-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .notice-detail-buttons button {
+    margin-right: 0;
+  }
+}

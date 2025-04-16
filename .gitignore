@@ -1,23 +1,47 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# ========================
+# ✅ React 관련
+# ========================
 /node_modules
 /.pnp
 .pnp.js
 
-# testing
 /coverage
-
-# production
 /build
 
-# misc
 .DS_Store
+
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# ========================
+# ✅ FastAPI 관련 (Python)
+# ========================
+venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# ========================
+# ✅ 환경변수 (공통)
+.env
+
+# ========================
+# ✅ Docker 관련
+db_data/
+*.log
+
+# ========================
+# ✅ VSCode 설정 (개인별 상이하므로 제외 권장)
+.vscode/
+
+# ========================
+# ✅ 기타 IDE 또는 시스템 캐시 (선택)
+.idea/
+*.swp
+*.swo
+*.bak

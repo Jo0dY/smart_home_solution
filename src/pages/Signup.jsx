@@ -1,7 +1,7 @@
+// SignupPage.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './Signup.css';
+import axios from '../lib/axios';import './Signup.css';
 import Navbar from './Navbar';
 
 function SignupPage() {
@@ -23,16 +23,49 @@ function SignupPage() {
   const [biz1, setBiz1] = useState('');
   const [biz2, setBiz2] = useState('');
   const [biz3, setBiz3] = useState('');
+  const [emailVerified, setEmailVerified] = useState(false);
 
   const handleTabClick = (type) => {
     setMemberType(type);
   };
 
+  const handleSendCode = async () => {
+    try {
+      await axios.post('http://localhost:8000/users/send-code', { email: email.trim() });
+      alert('인증코드가 전송되었습니다.');
+    } catch (err) {
+      alert('인증코드 발송 실패: ' + (err.response?.data?.detail || '오류 발생'));
+    }
+  };
+
+  const handleVerifyCode = async () => {
+    try {
+      const res = await axios.post('http://localhost:8000/users/verify-code', {
+        email: email.trim(),
+        code: authCode.trim()
+      });
+      alert('인증 성공');
+      setEmailVerified(true);
+    } catch (err) {
+      alert('인증 실패: ' + (err.response?.data?.detail || '오류 발생'));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!emailVerified) {
+      alert('이메일 인증이 필요합니다.');
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      alert('유효한 이메일 형식이 아닙니다.');
       return;
     }
 
@@ -41,9 +74,9 @@ function SignupPage() {
 
     const formData = {
       member_type: memberType === 'company' ? '개인사업자' : '개인회원',
-      email,
+      email: email.trim(),
       password,
-      name,
+      name: name.trim(),
       phone,
       carrier,
       birth: memberType === 'personal' ? birth : null,
@@ -53,7 +86,7 @@ function SignupPage() {
     };
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/users/signup', formData);
+      await axios.post('http://localhost:8000/users/signup', formData);
       alert('회원가입이 완료되었습니다!');
       navigate('/login');
     } catch (err) {
@@ -62,35 +95,11 @@ function SignupPage() {
     }
   };
 
-  // ✅ 인증코드 발송 함수
-  const sendCode = async () => {
-    try {
-      await axios.post('http://localhost:8000/users/send-code', { email });
-      alert('인증코드가 이메일로 전송되었습니다!');
-    } catch (err) {
-      alert('인증코드 전송 실패: ' + (err.response?.data?.detail || '오류'));
-    }
-  };
-
-  // ✅ 인증코드 확인 함수
-  const verifyCode = async () => {
-    try {
-      await axios.post('http://localhost:8000/users/verify-code', {
-        email,
-        code: String(authCode)
-      });
-      alert('이메일 인증 성공!');
-    } catch (err) {
-      alert('인증 실패: ' + (err.response?.data?.detail || '오류'));
-    }
-  };
-
   return (
     <div>
       <Navbar />
       <div className="register-container">
         <h1 className="register-title">회원가입</h1>
-
         <div className="tab-buttons">
           <button className={memberType === 'company' ? 'active' : ''} onClick={() => handleTabClick('company')}>기업회원</button>
           <button className={memberType === 'personal' ? 'active' : ''} onClick={() => handleTabClick('personal')}>개인회원</button>
@@ -101,11 +110,11 @@ function SignupPage() {
             <label>아이디*</label>
             <div className="form-row">
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="이메일 입력" required />
-              <button className="btn-sub" type="button" onClick={sendCode}>인증코드 발송</button>
+              <button className="btn-sub" type="button" onClick={handleSendCode}>인증코드 발송</button>
             </div>
             <div className="form-row">
               <input type="text" value={authCode} onChange={(e) => setAuthCode(e.target.value)} placeholder="인증코드 입력" />
-              <button className="btn-sub" type="button" onClick={verifyCode}>인증하기</button>
+              <button className="btn-sub" type="button" onClick={handleVerifyCode}>인증하기</button>
             </div>
           </div>
 
@@ -181,7 +190,7 @@ function SignupPage() {
 
           <div className="form-group">
             <div className="policy-buttons-inline">
-              <button type="button" className="policy-text-btn" onClick={() => navigate('/policy')}>개인정보처리방침 보기</button>
+              <button type="button" className="policy-text-btn" onClick={() => navigate('/privacy')}>개인정보처리방침 보기</button>
               <button type="button" className="policy-text-btn" onClick={() => navigate('/terms')}>서비스이용약관 보기</button>
             </div>
           </div>

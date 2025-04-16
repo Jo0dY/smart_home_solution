@@ -1,0 +1,79 @@
+.notice-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  /* 제목 스타일 */
+  .notice-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #3e5e3a;
+  }
+  
+  /* 공지 카드 리스트 */
+  .notice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* 공지 카드 */
+  .notice-card {
+    background-color: #f9f9f9;
+    padding: 20px 24px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .notice-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  
+  .notice-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+  }
+  
+  .notice-date {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  /* 하단 버튼 영역 */
+  .notice-bottom-button-area {
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  /* 구분선 */
+  .notice-divider {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin-bottom: 24px;
+  }
+  
+  /* 작성하기 버튼 */
+  .notice-write-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #3e713f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .notice-write-btn:hover {
+    background-color: #2f5d2f;
+  }
+  

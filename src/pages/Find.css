@@ -33,8 +33,8 @@ body, html {
 }
 
 .tab-buttons button {
-  width: 200px;    /* 👉 가로 길이 정확히 200px */
-  height: 60px;  
+  width: 200px;
+  height: 60px;
   padding: 18px 40px;
   font-size: 18px;
   border: 1px solid #ccc;
@@ -44,7 +44,6 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
   min-width: 180px;
 }
 
@@ -57,11 +56,10 @@ body, html {
 
 .auth-form {
   width: 100%;
-  max-width: 800px; /* 👉 원래 500px일 수도 있음 */
-  margin: 0 auto;   /* 가운데 정렬 유지 */
+  max-width: 800px;
+  margin: 0 auto;
   padding-bottom: 80px;
 }
-
 
 .auth-form h3 {
   font-size: 20px;
@@ -148,4 +146,26 @@ body, html {
 
 .main-action-btn:hover {
   background-color: var(--dark-green);
+}
+
+/* ✅ 새로 추가된 메시지 스타일 */
+.success-message {
+  background-color: #e6ffe6;
+  border: 1px solid #3e713f;
+  color: #2b542b;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  font-size: 15px;
+  white-space: pre-line;
+}
+
+.error-message {
+  background-color: #fff0f0;
+  border: 1px solid #e04f4f;
+  color: #a94442;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  font-size: 15px;
 }

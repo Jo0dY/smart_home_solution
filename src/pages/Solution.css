@@ -1,0 +1,238 @@
+.solution-page {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  /* 대표 섹션: 배경 적용 */
+  .solution-section.bg-section {
+    position: relative;
+    height: 100vh;
+    background-image: url('../images/security_bg1.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    color: white;
+  }
+  
+  .solution-section .content {
+    max-width: 800px;
+    text-align: left;
+    backdrop-filter: blur(2px); /* 약간의 유리 느낌 */
+  }
+  
+  .solution-section h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 24px;
+    color: #555;            /* ✅ 검정색으로 변경 */
+    text-shadow: none;      /* ✅ 그림자 제거 */
+  }
+  
+  /* ✅ 본문 글씨: 더 뚜렷하고 부드럽게 */
+  .solution-section p {
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: #555;  /* 완전 검정보다 살짝 연한 색으로 부드럽게 */
+  }
+  
+  
+  
+  /* 공통 섹션: 하얀 배경, 정돈된 구조 */
+  .section.white-section {
+    background-color: #ffffff;
+    padding: 100px 0;
+  }
+  
+  .plain-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
+    color: #111;
+  }
+  
+  .plain-content h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 60px;
+    text-align: left;
+    margin-left: 0;       /* ✅ 왼쪽 여백 없애기 */
+    padding-left: 0;      /* ✅ padding도 없애기 (혹시 남아있다면) */
+  }
+  
+  .plain-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .plain-content li {
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+    line-height: 1.9;
+    padding-left: 10px;
+    border-left: 3px solid #eee;
+  }
+  
+  .plain-content li strong {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #222;
+  }
+  
+  /* 구성도 설명 단락 */
+  .plain-content p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.9;
+    margin-bottom: 30px;
+  }
+  
+  /* 반응형 */
+  @media (max-width: 768px) {
+    .solution-section h1 {
+      font-size: 2rem;
+    }
+  
+    .solution-section p {
+      font-size: 1rem;
+    }
+  
+    .plain-content {
+      padding: 0 20px;
+    }
+  
+    .plain-content h2 {
+      font-size: 1.5rem;
+    }
+  
+    .plain-content li {
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+  
+    .plain-content li strong {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  
+  .action-buttons button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  .action-buttons .primary {
+    background-color: #4a6cf7;
+    color: white;
+  }
+  
+  .action-buttons .secondary {
+    background-color: white;
+    color: #4a6cf7;
+    border: 2px solid #4a6cf7;
+  }
+  
+  .vuln-diagram-section {
+    text-align: center;
+    padding-bottom: 80px;
+  }
+  
+  .diagram-header p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    white-space: pre-line;
+  }
+  
+  .diagram-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  }
+  
+  
+  .vuln-structure-section {
+    background-color: #f8fdf8;
+    padding: 100px 60px;
+  }
+  
+  .vuln-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  
+  .vuln-text {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+  }
+  
+  .vuln-text h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #111;
+  }
+  
+  .vuln-text p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.9;
+    white-space: pre-line;
+  }
+  
+  .vuln-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+  }
+  
+  .vuln-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  }
+  
+  .feature-row {
+    display: flex;
+    border-top: 1px solid #eee;
+    padding: 24px 0;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .feature-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    min-width: 180px;
+    color: #111;
+  }
+  
+  .feature-desc {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.8;
+    flex: 1;
+  }

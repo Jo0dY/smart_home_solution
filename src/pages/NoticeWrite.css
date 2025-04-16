@@ -1,0 +1,59 @@
+.notice-write-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.write-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* 🔄 공통된 form 스타일 */
+.notice-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* 🔄 제목 & 내용 공통 스타일 */
+.notice-input,
+.notice-textarea {
+  width: 100%;
+  max-width: 700px;
+  padding: 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.notice-textarea {
+  height: 250px;
+  resize: vertical;
+  margin-bottom: 25px;
+}
+
+/* ✅ 버튼 스타일 */
+.submit-btn {
+  align-self: flex-end;
+  padding: 12px 24px;
+  background-color: #087e26;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #037217;
+}

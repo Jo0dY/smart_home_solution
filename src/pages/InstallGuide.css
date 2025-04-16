@@ -1,5 +1,5 @@
 .install-guide-container {
-    max-width: 700px;
+    max-width: 800px;
     margin: 60px auto;
     padding: 40px;
     background-color: #f9f9f9;
@@ -9,13 +9,13 @@
   }
   
   .install-guide-container h1 {
-    font-size: 28px;
+    font-size: 30px;
     color: #333;
     margin-bottom: 12px;
   }
   
   .install-guide-container p {
-    font-size: 16px;
+    font-size: 18px;
     color: #666;
     margin-bottom: 32px;
   }
@@ -29,7 +29,7 @@
   }
   
   .install-icon {
-    width: 80px;
+    width: 100px;
     height: auto;
   }
   
@@ -40,22 +40,31 @@
     border: none;
     border-radius: 8px;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
     transition: background-color 0.3s;
+    margin-bottom: 1px;
   }
   
   .install-btn:hover {
     background-color: #388e3c;
   }
+  .install-instruction {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 가운데 정렬 */
+  }
+  
   
   .install-instruction ol {
     text-align: left;
     padding-left: 20px;
     color: #444;
     font-size: 15px;
+    margin-bottom: 10px;
+    
   }
   
   .install-instruction li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
   

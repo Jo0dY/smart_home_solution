@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../lib/axios'; // ✅ withCredentials: true 포함된 axios 인스턴스
 import './Login.css';
 import Navbar from './Navbar';
-import { useAuth } from '../contexts/AuthContext'; // ✅ 추가: 로그인 상태 관리
+import { useAuth } from '../contexts/AuthContext';
 
 function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth(); // ✅ 추가: login 함수 가져오기
+  const { login } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,25 +16,24 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8000/users/login', {
-        email,
-        password
-      });
-
-      const { access_token, user_id, email: userEmail, name } = response.data;
-
-      // ✅ localStorage 저장
-      localStorage.setItem('token', access_token);
+      // ✅ API 요청: FastAPI에 쿠키 기반 로그인 요청
+      const response = await axios.post('/users/login', { email, password }, { withCredentials: true });
+      const { user_id, email: userEmail, role } = response.data;
+      
+      console.log("✅ 로그인된 사용자 role:", role);  // 확인용
+      
       localStorage.setItem('user_id', user_id);
       localStorage.setItem('email', userEmail);
+      localStorage.setItem('role', role); // ✅ 반드시 저장
+      
 
-      // ✅ 로그인 상태 전역 반영
-      login({ id: user_id, email: userEmail, name }); // 이름 포함!
+      // ✅ 로그인 context 상태 갱신
+      login({ id: user_id, email: userEmail });
 
       alert('로그인 성공!');
       navigate('/');
     } catch (err) {
-      console.error('로그인 실패:', err.response?.data);
+      console.error('로그인 실패:', err.response?.data || err.message);
       alert(err.response?.data?.detail || '로그인 중 오류가 발생했습니다.');
     }
   };

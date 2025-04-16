@@ -1,0 +1,76 @@
+.contact-container {
+  text-align: center;
+  padding: 100px; /* ⬅ 전체 여백 늘림 (상단바와 간격 확보) */
+}
+
+.contact-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+.contact-line {
+  height: 2px;
+  background-color: #90d4ad;
+  width: 800px;
+  margin: 0 auto 60px;
+  border-radius: 3px;
+  margin-bottom: 60px;
+}
+
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px; /* ✅ 버튼과 설명 텍스트 간격 좁히기 */
+  margin-bottom: 80px;
+}
+
+.contact-subtitle {
+  font-size: 25px;         /* ✅ 글자 크기 키움 */
+  font-weight: bold;
+  color: #1b1b1b;
+  margin-bottom: -20px;        /* ✅ 아래 여백 없앰 */
+  margin-top: 10px;
+}
+
+/* ✅ 문의하기 버튼 전용 스타일 */
+.contact-button {
+  padding: 14px 24px;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1px;  /* ✅ 버튼과 위 텍스트 간격 좁힘 */
+}
+
+.contact-button.full {
+  width: 240px;
+  background-color: #27ae60;
+  border: none;
+  color: white;
+  height: 65px;
+  font-size: 20px;
+
+}
+
+.contact-button.full:hover {
+  opacity: 0.9;
+}
+
+.contact-button.full.outline {
+  background-color: white;
+  color: #27ae60;
+  border: 2px solid #27ae60;
+  width: 240px;
+  height: 65px;
+
+}
+
+.contact-button.full.outline:hover {
+  background-color: #e6f9ef;
+}

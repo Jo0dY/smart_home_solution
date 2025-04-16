@@ -18,7 +18,7 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 110px;
+  gap: 160px;
   padding: 0;
   margin: 0;
 }
@@ -58,3 +58,45 @@
   font-weight: bold;
   cursor: pointer;
 }  
+/* 드롭다운 메뉴 */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-label {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  border-radius: 8px;
+  padding: 0;
+}
+
+.dropdown-menu li {
+  list-style: none;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  color: #000000;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f1f8e9;
+}
+
+/* 드롭다운 호버 시 메뉴 표시 */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}

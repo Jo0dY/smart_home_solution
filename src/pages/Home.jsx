@@ -1,30 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import ScrollFeature from './ScrollFeature';
-import { useAuth } from '../contexts/AuthContext'; // ✅ 로그인 상태
+import Navbar from './Navbar';
 
-// 이미지 import
-import logoImg from '../assets/logo.png';
+// 이미지
 import buttonImg from '../assets/Button.png';
 import flowerImg from '../assets/main_flower.png';
 import jibomImg from '../assets/jibom_seat.png';
 import walk1 from '../assets/jibom_wark1.png';
 import walk2 from '../assets/jibom_wark2.png';
-import jibomVulne from '../assets/jibom_vulne.png';
-import jibomTraffic from '../assets/jibom_traffic.png';
-import jibomDetec from '../assets/jibom_detec.png';
-import jibomReport from '../assets/jibom_report.png';
-import arrowRight from '../assets/Arrow right-circle.png';
-import devicesImg from '../assets/devices.png';
 
 function Home() {
   const [jibomState, setJibomState] = useState('walk1');
   const [jibomLeft, setJibomLeft] = useState(1280);
   const [jibomDone, setJibomDone] = useState(false);
   const navigate = useNavigate();
-
-  const { isLoggedIn, logout } = useAuth(); // ✅ 로그인 여부 확인
 
   useEffect(() => {
     if (jibomDone) return;
@@ -48,63 +39,10 @@ function Home() {
 
   return (
     <div className="home-container">
-      {/* 네비게이션 바 */}
-      <nav className="navbar">
-        <div className="logo">
-          <img src={logoImg} alt="지켜_봄 로고" className="logo-img" />
-        </div>
-        <div className="nav-center">
-          <ul className="nav-links">
-            <li><Link to="/">홈</Link></li>
-            <li><Link to="/solution">솔루션 기능</Link></li>
-            <li><Link to="/notice">공지사항</Link></li>
-            <li><Link to="/contact">문의사항</Link></li>
-            <li><Link to="/privacy">개인정보 보호</Link></li>
-          </ul>
-        </div>
+      {/* ✅ 공통 네비게이션 컴포넌트 사용 */}
+      <Navbar />
 
-        <ul className="auth-group">
-          {isLoggedIn ? (
-            <>
-              <li className="login-link">안녕하세요!</li>
-              <li>
-                <button
-                  className="signup-btn"
-                  onClick={() => {
-                    const isAppInstalled = localStorage.getItem('app_installed') === 'true';
-                    if (isAppInstalled) {
-                      window.location.href = 'http://localhost:9999/mypage'; // 설치된 앱 열기
-                    } else {
-                      navigate('/install-guide'); // 설치 안내 페이지
-                    }
-                  }}
-                >
-                  마이페이지
-                </button>
-              </li>
-              <li>
-                <button className="signup-btn" onClick={() => {
-                  logout();
-                  navigate('/');
-                }}>
-                  로그아웃
-                </button>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="login-link"><Link to="/login">로그인</Link></li>
-              <li>
-                <Link to="/signup">
-                  <button className="signup-btn">회원가입</button>
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </nav>
-
-      {/* 메인 화면 */}
+      {/* 메인 콘텐츠 */}
       <main className="main-content">
         <div className="main-left">
           <h1>
@@ -116,7 +54,9 @@ function Home() {
             src={buttonImg}
             alt="지켜,봄 시작하기 버튼"
             className="start-button"
-            onClick={() => navigate('/login')}
+            onClick={() => {
+              navigate('/solution');
+            }}
           />
         </div>
         <div className="main-right">
@@ -141,53 +81,9 @@ function Home() {
         </div>
       </main>
 
-      {/* 스크롤 섹션 */}
-      <div style={{ height: '23vh' }}></div>
+      {/* 스크롤 전용 콘텐츠 */}
+      <div style={{ height: '9vh' }}></div>
       <ScrollFeature />
-      <div style={{ height: '400vh' }}></div>
-
-      {/* 기능 소개 섹션 */}
-      <section id="function-img" className="solution-feature-section">
-        <div className="feature-card">
-          <h3>취약점 분석</h3>
-          <img src={jibomVulne} alt="취약점 분석" className="feature-img" />
-          <img src={arrowRight} alt="화살표" className="arrow-icon" />
-        </div>
-        <div className="feature-card">
-          <h3>네트워크 트래픽 감시</h3>
-          <img src={jibomTraffic} alt="트래픽 감시" className="feature-img" />
-          <img src={arrowRight} alt="화살표" className="arrow-icon" />
-        </div>
-        <div className="feature-card">
-          <h3>AI 실시간 이상탐지</h3>
-          <img src={jibomDetec} alt="AI 이상탐지" className="feature-img" />
-          <img src={arrowRight} alt="화살표" className="arrow-icon" />
-        </div>
-        <div className="feature-card">
-          <h3>보안 리포트 확인</h3>
-          <img src={jibomReport} alt="보안 리포트" className="feature-img" />
-          <img src={arrowRight} alt="화살표" className="arrow-icon" />
-        </div>
-      </section>
-
-      {/* 사용 가능 기기 섹션 */}
-      <section className="detail-image-section" id="devices-img">
-        <div className="device-section">
-          <div className="device-img-wrapper">
-            <img src={devicesImg} alt="사용 가능 기기 이미지" className="device-img" />
-            <div className="device-list">
-              <h2>사용 가능 기기</h2>
-              <ul>
-                <li> 스마트 카메라</li>
-                <li> 스마트 도어락</li>
-                <li> 스마트 조명 스위치</li>
-                <li> AI 스피커</li>
-                <li> 센서 모듈</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
