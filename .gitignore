@@ -4,10 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
-
 /coverage
 /build
-
 .DS_Store
 
 .env.local
@@ -25,23 +23,33 @@ venv/
 __pycache__/
 *.py[cod]
 *.sqlite3
+*.db
 
 # ========================
 # ✅ 환경변수 (공통)
 .env
+*.log
 
 # ========================
 # ✅ Docker 관련
 db_data/
-*.log
+*.pid
+
+# ========================
+# ✅ Electron 관련
+electron-client/node_modules/
+electron-client/dist/
+electron-client/*.exe
+*.exe
 
 # ========================
 # ✅ VSCode 설정 (개인별 상이하므로 제외 권장)
 .vscode/
 
 # ========================
-# ✅ 기타 IDE 또는 시스템 캐시 (선택)
+# ✅ 기타 IDE 또는 시스템 캐시
 .idea/
 *.swp
 *.swo
 *.bak
+*.tmp

@@ -18,7 +18,7 @@ def create_notice(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-    if current_user.member_type != "admin":
+    if current_user.get("member_type") != "admin":
         raise HTTPException(status_code=403, detail="관리자만 작성 가능")
     
     new_notice = Notice(
@@ -33,7 +33,7 @@ def create_notice(
     # ✅ 관리자 로그 기록
     log_admin_action(
         db,
-        admin_id=current_user.id,
+        admin_id=current_user.get("id"),
         action="create",
         target_type="notice",
         target_id=new_notice.id
@@ -67,7 +67,10 @@ def update_notice(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-    if current_user.member_type != "admin":
+    print("📌 수정 요청 도착 - ID:", notice_id)
+    print("📌 데이터:", data)
+
+    if current_user.get("member_type") != "admin":
         raise HTTPException(status_code=403, detail="수정 권한 없음")
 
     notice = db.query(Notice).filter(Notice.id == notice_id).first()
@@ -81,7 +84,7 @@ def update_notice(
     # ✅ 관리자 로그 기록
     log_admin_action(
         db,
-        admin_id=current_user.id,
+        admin_id=current_user.get("id"),
         action="update",
         target_type="notice",
         target_id=notice_id
@@ -99,7 +102,7 @@ def delete_notice(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-    if current_user.member_type != "admin":
+    if current_user.get("member_type") != "admin":
         raise HTTPException(status_code=403, detail="삭제 권한 없음")
 
     notice = db.query(Notice).filter(Notice.id == notice_id).first()
@@ -112,7 +115,7 @@ def delete_notice(
     # ✅ 관리자 로그 기록
     log_admin_action(
         db,
-        admin_id=current_user.id,
+        admin_id=current_user.get("id"),
         action="delete",
         target_type="notice",
         target_id=notice_id

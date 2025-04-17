@@ -28,8 +28,7 @@ function NoticeWrite() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/notice', { title, content });
-      alert('공지사항이 작성되었습니다.');
+      await axios.post('/notice', { title, content }, { withCredentials: true });      alert('공지사항이 작성되었습니다.');
       navigate('/notice');
     } catch (err) {
       if (err.response?.status === 403) {
