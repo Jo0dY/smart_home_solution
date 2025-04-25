@@ -85,6 +85,11 @@ body, html {
   flex-direction: column;
 }
 
+.auth-form label + label {
+  margin-top: 4px;
+}
+
+
 .auth-form input,
 .auth-form select {
   padding: 14px;
@@ -96,11 +101,22 @@ body, html {
   box-sizing: border-box;
 }
 
+.auth-form input:focus {
+  border-color: var(--main-green);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(92, 184, 92, 0.2);
+}
+
 .phone-input-row,
 .code-row {
   display: flex;
   gap: 8px;
   align-items: center;
+}
+
+.code-row.verified input {
+  border-color: var(--main-green);
+  background-color: #f6fff6;
 }
 
 .phone-input-row select,
@@ -168,4 +184,28 @@ body, html {
   margin-bottom: 20px;
   border-radius: 6px;
   font-size: 15px;
+}
+
+.small-btn {
+  height: 46px;
+  padding: 0 16px;
+  background-color: #999;
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer; /* ✅ 손가락 모양 */
+  transition: background-color 0.2s ease;
+}
+
+.small-btn:hover {
+  background-color: #888; /* 약간 반응감 추가 */
+}
+
+.warn-text {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 4px;
 }

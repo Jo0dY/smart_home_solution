@@ -6,12 +6,18 @@ from fastapi import HTTPException
 from typing import Optional
 from datetime import date
 import bcrypt
+import re
 
 # ✅ 회원가입
 def create_user(db: Session, user: UserCreate) -> LoginResponse:
+    # 이메일 중복 체크
     existing_user = db.query(User).filter(User.email == user.email).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="이미 등록된 이메일입니다.")
+
+    # ✅ 비밀번호 정규식 유효성 체크 추가
+    if not re.match(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&~^])[A-Za-z\d@$!%*#?&~^]{8,16}$', user.password):
+        raise HTTPException(status_code=400, detail="비밀번호는 영문, 숫자, 특수문자 조합 8~16자리여야 합니다.")
 
     hashed_pw = bcrypt.hashpw(user.password.encode(), bcrypt.gensalt())
     db_user = User(
@@ -30,7 +36,7 @@ def create_user(db: Session, user: UserCreate) -> LoginResponse:
     db.commit()
     db.refresh(db_user)
 
-    return LoginResponse.model_validate(db_user, from_attributes=True)
+    return {"message": "회원가입이 완료되었습니다."}
 
 # ✅ 로그인
 def authenticate_user(db: Session, email: str, password: str) -> User:

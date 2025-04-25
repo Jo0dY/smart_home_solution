@@ -14,6 +14,8 @@ body {
   padding: 50px 10%;
   box-sizing: border-box;
   background-color: #fff;
+  max-width: 1200px;    /* ✅ 이거 추가: 최대 가로 폭 제한 */
+  margin: 0 auto;      /* ✅ 이거 추가: 가운데 정렬 */
 }
 
 .register-title {
@@ -130,4 +132,33 @@ select {
 
 .biznum-inputs span {
   white-space: nowrap;
+}
+
+.password-hint {
+  font-size: 13px;
+  color: #888;
+  margin-top: -4px;
+  margin-left: 4px;
+}
+
+.input-error {
+  border-color: #e74c3c;
+  background-color: #fff6f6;
+}
+
+.verified-input {
+  border-color: var(--main-green);
+  background-color: #f6fff6;
+}
+
+.warn-text {
+  color: #d9534f;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.form-row.verified-input input {
+  background-color: #f0fff0;
+  border: 2px solid var(--main-green);
+  font-weight: bold;
 }

@@ -66,3 +66,30 @@ body, html {
   cursor: pointer;
   color: var(--main-green);
 }
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remember-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: -8px;
+  margin-left: 4px;
+  margin-bottom: 10px;
+}
+
+.remember-label {
+  font-size: 14px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+.login-input::placeholder {
+  color: #aaa;
+}

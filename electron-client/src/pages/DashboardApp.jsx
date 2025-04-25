@@ -1,10 +1,10 @@
-// App.jsx
+// src/pages/DashboardApp.jsx
 import React, { useState, useEffect } from "react";
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import "../App.css"; // ✅ components → src로 한 단계 올라가기
+import "../App.css";
 
-// 이미지 경로 수정
+// 이미지 경로
 import homeIcon from "/icons/home.png";
 import profileIcon from "/icons/profile.png";
 import reportIcon from "/icons/report.png";
@@ -17,13 +17,20 @@ function DashboardApp() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  // ✅ 오늘 날짜 가져오기
+  const today = new Date().toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+
   useEffect(() => {
     if (!user) {
       navigate('/login');
     }
   }, [user, navigate]);
 
-  if (!user) return null; // 로그인 중이 아니면 아무것도 렌더링하지 않음
+  if (!user) return null;
 
   return (
     <div className="layout">
@@ -43,7 +50,7 @@ function DashboardApp() {
         </div>
       </div>
 
-      {/* 대시보드 메인 */}
+      {/* 대시보드 본문 */}
       <div className="dashboard-container">
         {/* 헤더 */}
         <div className="dashboard-header">
@@ -51,13 +58,13 @@ function DashboardApp() {
             <img src={avatarImage} alt="User Avatar" className="avatar" />
             <div className="user-info">
               <h2>지봄이님, 안녕하세요!</h2>
-              <p>2025년 4월 3일</p>
+              <p>{today}</p> {/* ✅ 자동 날짜 표시 */}
             </div>
           </div>
         </div>
 
         <div className="main-grid">
-          {/* 왼쪽 */}
+          {/* 왼쪽 기능 타일 */}
           <div className="left-group">
             <div className="row">
               <div className="tile small orange">대시보드 사용방법</div>
@@ -83,7 +90,7 @@ function DashboardApp() {
             </div>
           </div>
 
-          {/* 오른쪽 FAQ */}
+          {/* 오른쪽 지봄이 FAQ */}
           <div className="faq-section">
             <img src={jibomUmbImage} alt="지봄이" className="jibom" />
             <div className="faq-box">

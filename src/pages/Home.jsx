@@ -55,7 +55,7 @@ function Home() {
             alt="지켜,봄 시작하기 버튼"
             className="start-button"
             onClick={() => {
-              navigate('/solution');
+              navigate('/login');
             }}
           />
         </div>

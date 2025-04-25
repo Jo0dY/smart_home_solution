@@ -1,7 +1,7 @@
-// SignupPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../lib/axios';import './Signup.css';
+import axios from '../lib/axios';
+import './Signup.css';
 import Navbar from './Navbar';
 
 function SignupPage() {
@@ -10,8 +10,11 @@ function SignupPage() {
 
   const [email, setEmail] = useState('');
   const [authCode, setAuthCode] = useState('');
+  const [emailVerified, setEmailVerified] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordValid, setPasswordValid] = useState(null);
+  const [passwordsMatch, setPasswordsMatch] = useState(null);
   const [name, setName] = useState('');
   const [phone1, setPhone1] = useState('');
   const [phone2, setPhone2] = useState('');
@@ -23,15 +26,40 @@ function SignupPage() {
   const [biz1, setBiz1] = useState('');
   const [biz2, setBiz2] = useState('');
   const [biz3, setBiz3] = useState('');
-  const [emailVerified, setEmailVerified] = useState(false);
 
-  const handleTabClick = (type) => {
-    setMemberType(type);
+  useEffect(() => {
+    if (memberType === 'personal' && birth) {
+      const today = new Date();
+      const birthDate = new Date(birth);
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const isMinor =
+        age < 14 || (age === 14 && today < new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate()));
+  
+      setUnder14(isMinor);
+    }
+  }, [birth, memberType]);
+  
+
+  const handleTabClick = (type) => setMemberType(type);
+
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&~^+=-])[A-Za-z\d@$!%*#?&~^+=-]{8,16}$/;
+
+  const handlePasswordChange = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    setPasswordValid(passwordRegex.test(value));
+    setPasswordsMatch(value === confirmPassword);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    const value = e.target.value;
+    setConfirmPassword(value);
+    setPasswordsMatch(password === value);
   };
 
   const handleSendCode = async () => {
     try {
-      await axios.post('http://localhost:8000/users/send-code', { email: email.trim() });
+      await axios.post('http://localhost:8000/api/v1/users/send-code', { email: email.trim() });
       alert('인증코드가 전송되었습니다.');
     } catch (err) {
       alert('인증코드 발송 실패: ' + (err.response?.data?.detail || '오류 발생'));
@@ -40,12 +68,12 @@ function SignupPage() {
 
   const handleVerifyCode = async () => {
     try {
-      const res = await axios.post('http://localhost:8000/users/verify-code', {
+      await axios.post('http://localhost:8000/api/v1/users/verify-code', {
         email: email.trim(),
-        code: authCode.trim()
+        code: authCode.trim(),
       });
-      alert('인증 성공');
       setEmailVerified(true);
+      alert('이메일 인증 성공!');
     } catch (err) {
       alert('인증 실패: ' + (err.response?.data?.detail || '오류 발생'));
     }
@@ -54,20 +82,10 @@ function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!emailVerified) {
-      alert('이메일 인증이 필요합니다.');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      alert('비밀번호가 일치하지 않습니다.');
-      return;
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      alert('유효한 이메일 형식이 아닙니다.');
-      return;
-    }
+    if (!emailVerified) return alert('이메일 인증이 필요합니다.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return alert('유효한 이메일 형식이 아닙니다.');
+    if (!passwordRegex.test(password)) return alert('비밀번호는 8~16자, 영문/숫자/특수문자를 포함해야 합니다.');
+    if (password !== confirmPassword) return alert('비밀번호가 일치하지 않습니다.');
 
     const phone = `${phone1}-${phone2}-${phone3}`;
     const business_number = `${biz1}-${biz2}-${biz3}`;
@@ -86,8 +104,8 @@ function SignupPage() {
     };
 
     try {
-      await axios.post('http://localhost:8000/users/signup', formData);
-      alert('회원가입이 완료되었습니다!');
+      await axios.post('http://localhost:8000/api/v1/users/signup', formData);
+      alert('회원가입 완료!');
       navigate('/login');
     } catch (err) {
       console.error('회원가입 실패:', err.response?.data);
@@ -105,19 +123,23 @@ function SignupPage() {
           <button className={memberType === 'personal' ? 'active' : ''} onClick={() => handleTabClick('personal')}>개인회원</button>
         </div>
 
-        <form className="register-form" onSubmit={handleSubmit}>
+        <form className="register-form" onSubmit={handleSubmit} autoComplete="off">
+          {/* 이메일 인증 */}
           <div className="form-group">
-            <label>아이디*</label>
+            <label>아이디</label>
             <div className="form-row">
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="이메일 입력" required />
-              <button className="btn-sub" type="button" onClick={handleSendCode}>인증코드 발송</button>
+              <button type="button" className="btn-sub" onClick={handleSendCode}>인증코드 발송</button>
             </div>
-            <div className="form-row">
-              <input type="text" value={authCode} onChange={(e) => setAuthCode(e.target.value)} placeholder="인증코드 입력" />
-              <button className="btn-sub" type="button" onClick={handleVerifyCode}>인증하기</button>
+            <div className={`form-row ${emailVerified ? 'verified-input' : ''}`}>
+              <input type="text" value={authCode} onChange={(e) => setAuthCode(e.target.value)} placeholder="인증코드 입력" disabled={emailVerified} />
+              <button type="button" className="btn-sub" onClick={handleVerifyCode} disabled={emailVerified}>
+                {emailVerified ? '✔ 인증완료' : '인증하기'}
+              </button>
             </div>
           </div>
 
+          {/* 전화번호 */}
           <div className="form-group">
             <label>휴대전화번호</label>
             <div className="tel-combo-row">
@@ -130,6 +152,7 @@ function SignupPage() {
                 <option value="알뜰폰(KT)">알뜰폰(KT)</option>
                 <option value="알뜰폰(LG U+)">알뜰폰(LG U+)</option>
               </select>
+              
               <select value={phone1} onChange={(e) => setPhone1(e.target.value)} required>
                 <option value="">선택</option>
                 <option>010</option>
@@ -139,25 +162,29 @@ function SignupPage() {
             </div>
           </div>
 
+          {/* 이름 */}
           <div className="form-group">
-            <label>이름*</label>
+            <label>이름</label>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
 
+          {/* 비밀번호 */}
           <div className="form-group">
-            <label>비밀번호*</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <label>비밀번호</label>
+            <input type="password" value={password} onChange={handlePasswordChange} required />
+            {passwordValid === false && <p className="warn-text">※ 영문, 숫자, 특수문자 포함 8~16자리</p>}
+          </div>
+          <div className="form-group">
+            <label>비밀번호 확인</label>
+            <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
+            {passwordsMatch === false && <p className="warn-text">※ 비밀번호가 일치하지 않습니다.</p>}
           </div>
 
-          <div className="form-group">
-            <label>비밀번호 확인*</label>
-            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-          </div>
-
+          {/* 개인용 or 기업용 */}
           {memberType === 'personal' && (
             <div className="form-group">
-              <label>생년월일*</label>
-              <input type="date" value={birth} onChange={(e) => setBirth(e.target.value)} required />
+              <label>생년월일</label>
+              <input type="text" value={birth} onChange={(e) => setBirth(e.target.value)} placeholder='예) 2000-01-01'required />
               <div className="minor-check">
                 <div className="minor-left">
                   <input type="checkbox" id="under14" checked={under14} onChange={(e) => setUnder14(e.target.checked)} />
@@ -171,11 +198,11 @@ function SignupPage() {
           {memberType === 'company' && (
             <>
               <div className="form-group">
-                <label>회사명*</label>
+                <label>회사명</label>
                 <input type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} required />
               </div>
               <div className="form-group">
-                <label>사업자등록번호*</label>
+                <label>사업자등록번호</label>
                 <div className="biznum-inputs">
                   <input type="text" value={biz1} onChange={(e) => setBiz1(e.target.value)} required />
                   <span>-</span>
@@ -187,13 +214,6 @@ function SignupPage() {
               </div>
             </>
           )}
-
-          <div className="form-group">
-            <div className="policy-buttons-inline">
-              <button type="button" className="policy-text-btn" onClick={() => navigate('/privacy')}>개인정보처리방침 보기</button>
-              <button type="button" className="policy-text-btn" onClick={() => navigate('/terms')}>서비스이용약관 보기</button>
-            </div>
-          </div>
 
           <button type="submit" className="register-submit">회원가입</button>
         </form>

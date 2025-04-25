@@ -1,36 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Navbar.css';
 import logoImg from '../assets/logo.png';
+import { useAuth } from '../contexts/AuthContext';
 
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const isSolutionPage = location.pathname === '/solution';
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState('');
-
-  useEffect(() => {
-    const storedEmail = localStorage.getItem('email');
-    if (storedEmail) {
-      setIsLoggedIn(true);
-      setUserEmail(storedEmail);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [location.pathname]); // 페이지 이동 시 확인
+  const { user, isLoggedIn, logout } = useAuth();  // ✅ 여기만으로 로그인 상태 & 이메일 가져옴
 
   const handleLogout = () => {
-    localStorage.clear();
-    setIsLoggedIn(false);
+    logout();  // ✅ Context에서 logout 처리
     navigate('/');
   };
 
   return (
     <nav className={`navbar ${isSolutionPage ? 'navbar-solution' : ''}`}>
       <div className="logo">
-        <img src={logoImg} alt="지켜_봄 로고" className="logo-img" />
+        <Link to="/">
+          <img src={logoImg} alt="지켜_봄 로고" className="logo-img" />
+        </Link>
       </div>
 
       <div className="nav-center">
@@ -38,8 +29,6 @@ function Navbar() {
           <li><Link to="/">홈</Link></li>
           <li><Link to="/solution">솔루션 기능</Link></li>
           <li><Link to="/notice">공지사항</Link></li>
-
-          {/* ✅ 문의사항 드롭다운 */}
           <li className="dropdown">
             <Link to="#" className="dropdown-label">문의사항</Link>
             <ul className="dropdown-menu">
@@ -53,7 +42,7 @@ function Navbar() {
       <ul className="auth-group">
         {isLoggedIn ? (
           <>
-            <li className="login-link">👋 {userEmail}님</li>
+            <li className="login-link">👋 {user?.email || '사용자'}님</li>
             <li>
               <Link to="/mypage">
                 <button className="signup-btn">마이페이지</button>

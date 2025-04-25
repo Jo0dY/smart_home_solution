@@ -1,4 +1,3 @@
-# ✅ routers/user.py
 from fastapi import APIRouter, Depends, HTTPException, Body, Response, Request, Cookie
 from sqlalchemy.orm import Session
 from database import SessionLocal, get_db
@@ -55,17 +54,24 @@ def verify_code(email: str = Body(...), code: str = Body(...)):
     stored = r.get(email)
     if not stored or stored != code:
         raise HTTPException(status_code=400, detail="인증코드 오류")
+    # ✅ 인증 성공 여부 저장 (5분 유지)
+    r.set(f"{email}_verified", "true", ex=300)
     return {"message": "인증 성공"}
 
 @router.post("/signup")
 def register_user(user: UserCreate, db: Session = Depends(get_db)):
-    return create_user(db, user)
+    # ✅ 이메일 인증 여부 체크
+    verified = r.get(f"{user.email}_verified")
+    if not verified or verified != "true":
+        raise HTTPException(status_code=400, detail="이메일 인증이 필요합니다.")
+
+    create_user(db, user)
+    return {"message": "회원가입이 완료되었습니다."}
 
 @router.post("/login")
 def login_user(user: UserLogin, response: Response, db: Session = Depends(get_db)):
     user_in_db = authenticate_user(db, user.email, user.password)
 
-    # ✅ 토큰 생성 (access + refresh)
     access_token = create_access_token(
         email=user_in_db.email,
         user_id=user_in_db.id,
@@ -73,14 +79,13 @@ def login_user(user: UserLogin, response: Response, db: Session = Depends(get_db
     )
     refresh_token = create_refresh_token({"email": user_in_db.email})
 
-    # ✅ httpOnly 쿠키에 저장
     response.set_cookie(
         key="access_token",
         value=access_token,
         httponly=True,
         max_age=60 * 60,
         samesite="lax",
-        secure=False  # 배포 시 True
+        secure=False
     )
     response.set_cookie(
         key="refresh_token",
@@ -91,6 +96,7 @@ def login_user(user: UserLogin, response: Response, db: Session = Depends(get_db
         secure=False
     )
     return {
+        "message": "로그인 성공",
         "user_id": user_in_db.id,
         "email": user_in_db.email,
         "role": user_in_db.member_type
@@ -105,12 +111,10 @@ def refresh_access_token(response: Response, refresh_token: str = Cookie(None), 
     if not email:
         raise HTTPException(status_code=401, detail="리프레시 토큰 유효하지 않음")
 
-    # ✅ DB에서 사용자 정보 조회
     user = db.query(User).filter(User.email == email).first()
     if not user:
         raise HTTPException(status_code=404, detail="사용자 없음")
 
-    # ✅ 올바른 정보로 토큰 재발급
     new_access_token = create_access_token(
         email=user.email,
         user_id=user.id,
@@ -134,8 +138,12 @@ def find_id(request: FindIDRequest, db: Session = Depends(get_db)):
 
 @router.post("/reset-password")
 def reset_password(request: ResetPasswordRequest, db: Session = Depends(get_db)):
+    verified = r.get(f"{request.email}_verified")
+    if not verified or verified != "true":
+        raise HTTPException(status_code=400, detail="이메일 인증이 필요합니다.")
+
     user = check_reset_password_target(db, request.email)
-    return {"message": f"{user.name} 확인됨"}
+    return {"message": f"{user.name} 확인됨", "user_id": user.id}
 
 @router.put("/update-password")
 def update_password(request: UpdatePasswordRequest, db: Session = Depends(get_db)):
@@ -144,8 +152,8 @@ def update_password(request: UpdatePasswordRequest, db: Session = Depends(get_db
 
 @router.get("/me")
 def get_me(request: Request, current_user=Depends(get_current_user)):
-    print("📦 request.headers.cookie:", request.headers.get("cookie"))
-    print("🍪 쿠키에서 access_token:", request.cookies.get("access_token"))
+    print("\ud83d\udce6 request.headers.cookie:", request.headers.get("cookie"))
+    print("\ud83c\udf6a \ucfe0\ud0a4\uc5d0\uc11c access_token:", request.cookies.get("access_token"))
     return {
         "user_id": current_user["user_id"],
         "email": current_user["email"],

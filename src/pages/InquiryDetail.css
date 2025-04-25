@@ -1,118 +1,118 @@
 .user-inquiry-detail-container {
-    max-width: 800px;
-    margin: 100px auto;
-    padding: 50px;
-    background-color: #fff; 
-    border-radius: 12px; 
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
-  }
-  
-  .user-detail-title {
-    font-size: 28px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
-    color: #2e7d32;
-  }
-  
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 50px;
+  background-color: #fff; 
+  border-radius: 12px; 
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+}
 
-  .section-divider {
-    height: 2px;
-    background-color: #90d4ad;
-    border: none;
-    margin: 20px 0;
-    margin-bottom: 10px;
-  }
-  
-  .user-detail-card {
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-  }
-  
-  .user-readonly-textarea {
-    width: 99%;
-    padding: 12px;
-    font-size: 16px;
-    border: 1.2px solid #c1c3c2;
-    border-radius: 8px;
-    resize: vertical;
-    margin-top: 40px;
-    margin-left: -10px;
-    background-color: #ffffff;
-    height: 180px;
-    margin-bottom: 65px;
-  }
-  
-  .user-button-box {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: -20px;
-  }
-  
-  .user-edit-btn, .user-delete-btn {
-    padding: 8px 16px;
-    font-size: 15px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .user-edit-btn {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .user-delete-btn {
-    background-color: #e74c3c;
-    color: white;
-  }
-  
-  .admin-answer-box {
-    width: 97%;
-    height: 150px;
-    margin-top: 30px;
-    padding: 15px;
-    background-color: #ffffff;
-    border-left: 5px solid #ffffff;
-    border-radius: 8px;
-    border: 1px solid #000000;
-    margin-bottom: 50px;
+.user-detail-title {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #2e7d32;
+}
 
-  }
-  
-  .answer-title {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 30px;
-    margin-top: 10px;
-  }
-  
-  .admin-answer {
-    font-size: 15px;
-    color: #333;
-    margin-top: 25px;
-    margin-bottom: 25px;
-  }
-  
-  .next-inquiry-guide {
-    text-align: center;
-    margin-top: 40px;
-  }
-  
-  .next-inquiry-btn {
-    padding: 12px 22px;
-    font-size: 16px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .next-inquiry-btn:hover {
-    background-color: #219150;
-  }
-  
-  
+
+.section-divider {
+  height: 2px;
+  background-color: #90d4ad;
+  border: none;
+  margin: 20px 0;
+  margin-bottom: 10px;
+}
+
+.user-detail-card {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.user-readonly-textarea {
+  width: 99%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1.2px solid #c1c3c2;
+  border-radius: 8px;
+  resize: vertical;
+  margin-top: 40px;
+  margin-left: -10px;
+  background-color: #ffffff;
+  height: 180px;
+  margin-bottom: 65px;
+}
+
+.user-button-box {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: -20px;
+}
+
+.user-edit-btn, .user-delete-btn {
+  padding: 8px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.user-edit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.user-delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.admin-answer-box {
+  width: 98%;
+  height: 180px;
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-left: 5px solid #ffffff;
+  border-radius: 8px;
+  border: 1px solid #000000;
+  margin-bottom: 50px;
+  margin-left: -10px;
+
+}
+
+.answer-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.admin-answer {
+  font-size: 15px;
+  color: #333;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.next-inquiry-guide {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.next-inquiry-btn {
+  padding: 12px 22px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.next-inquiry-btn:hover {
+  background-color: #219150;
+}
+

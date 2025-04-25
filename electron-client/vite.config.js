@@ -5,14 +5,17 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: 'dist', // 빌드시 결과물이 dist 폴더에 생성됨
+    outDir: 'dist',
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // @로 src 경로 단축 가능
+      '@': path.resolve(__dirname, './src'),
+      '@lib': path.resolve(__dirname, './src/lib'),
     },
   },
   server: {
-    port: 5173, // Electron과 맞추기 위해 고정
+    port: 5173,
+    // ✅ 여기가 핵심!
+    historyApiFallback: true,
   },
 });

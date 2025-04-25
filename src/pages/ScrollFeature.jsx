@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // ⬅ 위치 수정됨
 import './ScrollFeature.css';
 import Footer from './Footer';
 
@@ -48,6 +49,7 @@ function ScrollFeature() {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef(null);
   const isThrottling = useRef(false);
+  const navigate = useNavigate(); // ✅ navigate 선언 위치 수정됨
 
   useEffect(() => {
     const handleWheel = (e) => {
@@ -112,24 +114,29 @@ function ScrollFeature() {
         </div>
       </div>
 
+      {/* ✅ 솔루션 기능 카드 */}
       <section id="function-img" className="solution-feature-section">
         <h2 className="funtion-title">🌱지켜,봄  솔루션 기능🌱</h2>
-        <div className="feature-card">
+
+        <div className="feature-card" onClick={() => navigate('/solution')}>
           <h3>취약점 분석</h3>
           <img src={jibomVulne} alt="취약점 분석" className="feature-img" />
           <img src={arrowRight} alt="화살표" className="arrow-icon" />
         </div>
-        <div className="feature-card">
+
+        <div className="feature-card" onClick={() => navigate('/solution')}>
           <h3>AI 실시간 이상탐지</h3>
           <img src={jibomDetec} alt="AI 이상탐지" className="feature-img" />
           <img src={arrowRight} alt="화살표" className="arrow-icon" />
         </div>
-        <div className="feature-card">
+
+        <div className="feature-card" onClick={() => navigate('/solution')}>
           <h3>보안 리포트 확인</h3>
           <img src={jibomReport} alt="보안 리포트" className="feature-img" />
           <img src={arrowRight} alt="화살표" className="arrow-icon" />
         </div>
       </section>
+
 
       <section className="device-gallery-wrapper">
         <h2 className="device-title">[ 사용 가능 기기 목록 ]</h2>
@@ -182,7 +189,7 @@ function ScrollFeature() {
       </section>
 
       <section className="guide-section-wrapper">
-        <h2>🌱이용방법🌱</h2>
+        <h2>🌱이용 방법🌱</h2>
         <div className="guide-flow-text">
           <div className="guide-step-text">[회원 가입]</div>
           <div className="guide-arrow-text">→</div>
@@ -201,11 +208,11 @@ function ScrollFeature() {
         <div className="dashboard-flow">
           <div className="dashboard-step">
             <img src={require('../assets/jibom_login.png')} alt="로그인 화면" />
-            <p>1. 로그인 화면</p>
+            <p>1. 회원가입 & 로그인</p>
           </div>
           <div className="dashboard-step">
             <img src={require('../assets/jibom_dashboard.png')} alt="마이 대시보드" />
-            <p>2. 마이 대시보드 화면</p>
+            <p>2. 지켜봄 설치 [마이 대시보드 화면]</p>
           </div>
         </div>
       </section>
