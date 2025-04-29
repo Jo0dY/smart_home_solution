@@ -14,6 +14,8 @@ class UserCreate(BaseModel):
     under14: Optional[bool] = None
     company_name: Optional[str] = None
     business_number: Optional[str] = None
+    parent_verified: Optional[bool] = False
+
 
 # ✅ 로그인 요청 스키마
 class UserLogin(BaseModel):

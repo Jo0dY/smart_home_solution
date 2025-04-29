@@ -1,0 +1,61 @@
+.parent-auth-box {
+  width: 100%;
+  max-width: 450px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.parent-auth-box h4 {
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 0; /* ✅ h4 위쪽 여백 없애기 */  
+}
+
+.parent-auth-box .form-group {
+  margin-bottom: 12px;
+}
+
+.parent-auth-box label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.parent-auth-box input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 0.95rem;
+}
+
+.parent-auth-box button {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.parent-auth-box button:hover {
+  background-color: #45a049;
+}
+
+.warn-text {
+  color: red;
+  font-size: 0.85em;
+  margin-top: 6px;
+}

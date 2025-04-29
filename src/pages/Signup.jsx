@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../lib/axios';
 import './Signup.css';
+import ParentPhoneAuth from './ParentPhoneAuth'; // ✅ 경로는 pages에 있을 경우 그대로
 import Navbar from './Navbar';
 
 function SignupPage() {
@@ -21,6 +22,10 @@ function SignupPage() {
   const [phone3, setPhone3] = useState('');
   const [carrier, setCarrier] = useState('');
   const [birth, setBirth] = useState('');
+  const [isParentAuthOpen, setIsParentAuthOpen] = useState(false);
+  const [isParentVerified, setIsParentVerified] = useState(false);  // ✅ 보호자 인증 상태 
+  const [parentName, setParentName] = useState('');
+  const [parentPhone, setParentPhone] = useState('');
   const [under14, setUnder14] = useState(false);
   const [companyName, setCompanyName] = useState('');
   const [biz1, setBiz1] = useState('');
@@ -28,7 +33,7 @@ function SignupPage() {
   const [biz3, setBiz3] = useState('');
 
   useEffect(() => {
-    if (memberType === 'personal' && birth) {
+    if (memberType === 'personal' && birth && emailVerified) {
       const today = new Date();
       const birthDate = new Date(birth);
       const age = today.getFullYear() - birthDate.getFullYear();
@@ -36,8 +41,10 @@ function SignupPage() {
         age < 14 || (age === 14 && today < new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate()));
   
       setUnder14(isMinor);
+    } else {
+      setUnder14(false);
     }
-  }, [birth, memberType]);
+  }, [birth, memberType, emailVerified]);  
   
 
   const handleTabClick = (type) => setMemberType(type);
@@ -86,6 +93,9 @@ function SignupPage() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return alert('유효한 이메일 형식이 아닙니다.');
     if (!passwordRegex.test(password)) return alert('비밀번호는 8~16자, 영문/숫자/특수문자를 포함해야 합니다.');
     if (password !== confirmPassword) return alert('비밀번호가 일치하지 않습니다.');
+    if (under14 && !isParentVerified) {
+      return alert('만 14세 미만은 보호자 인증이 필요합니다.');
+    }    
 
     const phone = `${phone1}-${phone2}-${phone3}`;
     const business_number = `${biz1}-${biz2}-${biz3}`;
@@ -101,6 +111,7 @@ function SignupPage() {
       under14: memberType === 'personal' ? under14 : false,
       company_name: memberType === 'company' ? companyName : '',
       business_number: memberType === 'company' ? business_number : '',
+      parent_verified: under14 ? isParentVerified : false
     };
 
     try {
@@ -190,10 +201,36 @@ function SignupPage() {
                   <input type="checkbox" id="under14" checked={under14} onChange={(e) => setUnder14(e.target.checked)} />
                   <label htmlFor="under14">만14세 미만 회원</label>
                 </div>
-                <button className="btn-sub" type="button">법정대리인 동의</button>
+                <button
+                  className="btn-sub"
+                  type="button"
+                  disabled={!emailVerified}   // ✅ 이메일 인증 안되면 버튼 비활성화
+                  onClick={() => {
+                    if (!emailVerified) {
+                      alert('이메일 인증이 필요합니다.');
+                      return;
+                    }
+                    console.log("법정대리인 동의 버튼 클릭됨");
+                    setIsParentAuthOpen(true);
+                    console.log("isParentAuthOpen set to true");
+                  }}
+                >
+                  법정대리인 동의
+                </button>
               </div>
             </div>
           )}
+          {under14 && isParentAuthOpen && (
+            <div className="form-group">
+              <ParentPhoneAuth
+                onVerified={() => setIsParentVerified(true)}  // ✅ 인증 성공 시 상태 true
+              />
+              {isParentVerified && (
+                <p className="success-text">✔ 보호자 전화번호 인증 완료</p>
+              )}
+            </div>
+          )}
+
 
           {memberType === 'company' && (
             <>

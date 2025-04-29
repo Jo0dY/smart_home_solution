@@ -20,18 +20,21 @@ def create_user(db: Session, user: UserCreate) -> LoginResponse:
         raise HTTPException(status_code=400, detail="비밀번호는 영문, 숫자, 특수문자 조합 8~16자리여야 합니다.")
 
     hashed_pw = bcrypt.hashpw(user.password.encode(), bcrypt.gensalt())
+    user_data = user.dict()
     db_user = User(
-        member_type=user.member_type,
-        email=user.email,
+        member_type=user_data.get('member_type'),
+        email=user_data.get('email'),
         password=hashed_pw.decode(),
-        name=user.name,
-        phone=user.phone,
-        carrier=user.carrier,
-        birth=user.birth,
-        under14=user.under14,
-        company_name=user.company_name,
-        business_number=user.business_number,
+        name=user_data.get('name'),
+        phone=user_data.get('phone'),
+        carrier=user_data.get('carrier'),
+        birth=user_data.get('birth'),
+        under14=user_data.get('under14', False),
+        parent_verified=user_data.get('parent_verified', False),  # ✅ 안전하게 가져옴
+        company_name=user_data.get('company_name', ''),
+        business_number=user_data.get('business_number', '')
     )
+    
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

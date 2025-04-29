@@ -25,6 +25,7 @@ import AdminInquiry from './pages/AdminInquiry';
 import AdminInquiryDetail from './pages/AdminInquiryDetail'; // ✅ 관리자용 상세조회
 
 import { AuthProvider } from './contexts/AuthContext';
+import ParentPhoneAuth from './pages/ParentPhoneAuth';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/parent-auth" element={<ParentPhoneAuth />} />
         <Route path="/solution" element={<Solution />} />
         <Route path="/notice" element={<Notice />} />
         <Route path="/notice/:id" element={<NoticeDetail />} />

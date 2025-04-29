@@ -17,6 +17,7 @@ from auth import (
     get_current_user
 )
 from models import User
+from fastapi.responses import JSONResponse
 import random, smtplib, redis, os
 from email.mime.text import MIMEText
 
@@ -61,9 +62,13 @@ def verify_code(email: str = Body(...), code: str = Body(...)):
 @router.post("/signup")
 def register_user(user: UserCreate, db: Session = Depends(get_db)):
     # ✅ 이메일 인증 여부 체크
+    print("[DEBUG] user type:", type(user))
+    print("[DEBUG] user dict:", user.dict())
     verified = r.get(f"{user.email}_verified")
     if not verified or verified != "true":
         raise HTTPException(status_code=400, detail="이메일 인증이 필요합니다.")
+    if user.under14 and not user.parent_verified:
+        raise HTTPException(status_code=403, detail="만 14세 미만은 보호자 인증이 필요합니다.")
 
     create_user(db, user)
     return {"message": "회원가입이 완료되었습니다."}
@@ -101,6 +106,13 @@ def login_user(user: UserLogin, response: Response, db: Session = Depends(get_db
         "email": user_in_db.email,
         "role": user_in_db.member_type
     }
+
+@router.post("/logout")
+def logout_user(response: Response):
+    res = JSONResponse(content={"message": "로그아웃 완료"})
+    res.delete_cookie(key="access_token")
+    res.delete_cookie(key="refresh_token")
+    return res
 
 @router.post("/refresh")
 def refresh_access_token(response: Response, refresh_token: str = Cookie(None), db: Session = Depends(get_db)):
@@ -152,8 +164,9 @@ def update_password(request: UpdatePasswordRequest, db: Session = Depends(get_db
 
 @router.get("/me")
 def get_me(request: Request, current_user=Depends(get_current_user)):
-    print("\ud83d\udce6 request.headers.cookie:", request.headers.get("cookie"))
-    print("\ud83c\udf6a \ucfe0\ud0a4\uc5d0\uc11c access_token:", request.cookies.get("access_token"))
+    if os.getenv("ENV") == "development":
+        cookie_keys = list(request.cookies.keys())
+        print(f"[DEBUG] Cookie keys: {cookie_keys}")
     return {
         "user_id": current_user["user_id"],
         "email": current_user["email"],

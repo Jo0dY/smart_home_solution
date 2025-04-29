@@ -25,6 +25,8 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+
+
     if (!validateEmail(email)) {
       alert('유효한 이메일 형식을 입력해주세요.');
       return;
@@ -43,18 +45,15 @@ function Login() {
       );
 
       const { user_id, email: userEmail, role } = res.data;
+      // localStorage에 민감한 정보 저장 ❌
+      login({ email: userEmail, user_id, role }); // Context에만 저장
 
+      // 오직 아이디 저장 체크만 localStorage 사용
       if (rememberEmail) {
         localStorage.setItem('remembered_email', userEmail);
       } else {
         localStorage.removeItem('remembered_email');
       }
-
-      localStorage.setItem('user_id', user_id);
-      localStorage.setItem('email', userEmail);
-      localStorage.setItem('role', role);
-
-      login({ id: user_id, email: userEmail });
 
       alert('로그인 성공!');
       navigate('/');

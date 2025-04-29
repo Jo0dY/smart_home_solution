@@ -11,10 +11,10 @@ function Navbar() {
 
   const { user, isLoggedIn, logout } = useAuth();  // ✅ 여기만으로 로그인 상태 & 이메일 가져옴
 
-  const handleLogout = () => {
-    logout();  // ✅ Context에서 logout 처리
-    navigate('/');
-  };
+  const handleLogout = async () => {
+    await logout();  // ❗ 서버에 진짜 요청 보낸 다음
+    navigate('/');   // ❗ 그 다음 이동
+  };  
 
   return (
     <nav className={`navbar ${isSolutionPage ? 'navbar-solution' : ''}`}>

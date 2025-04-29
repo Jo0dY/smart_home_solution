@@ -28,28 +28,41 @@ export function AuthProvider({ children }) {
     setUser(userData);
   };
 
-  // ✅ 로그아웃 시 쿠키 기반 로그아웃 + 상태 제거
-  const logout = () => {
-    const remembered = localStorage.getItem('remembered_email');
-    localStorage.clear(); // 다 비우고
-    if (remembered) localStorage.setItem('remembered_email', remembered);
-    setUser(null);
-  };
+// ✅ 로그아웃 시 쿠키 기반 로그아웃 + 상태 제거
+const logout = async () => {
+  try {
+    const res = await fetch('http://localhost:8000/api/v1/users/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
+    const data = await res.json();
+    console.log('✅ 서버 로그아웃 응답:', data);
+  } catch (err) {
+    console.error('❌ 서버에 로그아웃 실패:', err);
+  }
 
-  return (
-    <AuthContext.Provider
-      value={{
-        isLoggedIn: !!user,
-        user,
-        login,
-        logout,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+  const remembered = localStorage.getItem('remembered_email');
+  localStorage.clear();
+  if (remembered) {
+    localStorage.setItem('remembered_email', remembered);
+  }
+  setUser(null);
+};
+
+return (
+  <AuthContext.Provider
+    value={{
+      isLoggedIn: !!user,
+      user,
+      login,
+      logout,
+    }}
+  >
+    {children}
+  </AuthContext.Provider>
+);
 }
 
 export function useAuth() {
-  return useContext(AuthContext);
+return useContext(AuthContext);
 }

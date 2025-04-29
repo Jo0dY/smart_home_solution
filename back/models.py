@@ -18,6 +18,7 @@ class User(Base):
     under14 = Column(Boolean, default=False)
     company_name = Column(String(100), nullable=True)
     business_number = Column(String(30), nullable=True)
+    parent_verified = Column(Boolean, default=False)
 
 # ✅ 공지사항(Notice) 테이블
 class Notice(Base):
