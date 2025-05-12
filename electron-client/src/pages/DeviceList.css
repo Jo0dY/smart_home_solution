@@ -1,0 +1,96 @@
+/* 레이아웃 전체 */
+.layout {
+  display: flex;
+}
+
+/* 사이드바 */
+.sidebar {
+  width: 80px;
+  background-color: #d8ebc7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0;
+  color: #2c3e50;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-item img {
+  width: 24px;
+  height: 24px;
+}
+
+.menu-bottom {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* 본문 컨테이너 */
+.device-list-container {
+  flex: 1;
+  max-width: 1000px;
+  margin: 3rem auto;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
+
+.device-list-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 70px;
+}
+
+.device-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.device-card {
+  width: 280px;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+}
+
+.device-card button {
+  margin-top: 1rem;
+  background-color: #81c784;
+  border: none;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.device-card button:hover {
+  background-color: #66bb6a;
+}

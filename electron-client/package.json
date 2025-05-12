@@ -3,19 +3,19 @@
     "version": "1.0.0",
     "main": "main.js",
     "scripts": {
-      "dev": "concurrently \"vite --port 5173\" \"wait-on http://localhost:5173 && electron .\"",
-      "start": "electron ."
+        "dev": "concurrently \"vite --port 5173\" \"wait-on http://localhost:5173 && electron .\"",
+        "start": "electron ."
     },
     "dependencies": {
-      "electron": "^28.1.0"
+        "electron": "^28.1.0",
+        "recharts": "^2.15.3"
     },
     "devDependencies": {
-      "@vitejs/plugin-react": "^4.1.0",
-      "concurrently": "^8.2.2",
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0",
-      "vite": "^5.2.0",
-      "wait-on": "^7.2.0"
+        "@vitejs/plugin-react": "^4.1.0",
+        "concurrently": "^8.2.2",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "vite": "^5.2.0",
+        "wait-on": "^7.2.0"
     }
-  }
-  
+}

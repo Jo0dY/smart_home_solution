@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Solution from './pages/Solution';
@@ -16,18 +17,22 @@ import Faq from './pages/Faq';
 
 import ContactPrivate from './pages/ContactPrivate';
 import ContactPrivateWrite from './pages/ContactPrivateWrite';
-import ContactPrivateDetail from './pages/InquiryDetail'; // ✅ 사용자용 상세조회 연결
+import InquiryDetail from './pages/InquiryDetail';
 import ContactPrivateEdit from './pages/ContactPrivateEdit';
-import InquiryDetail from './pages/InquiryDetail'; // 👈 추가
-
 
 import AdminInquiry from './pages/AdminInquiry';
-import AdminInquiryDetail from './pages/AdminInquiryDetail'; // ✅ 관리자용 상세조회
+import AdminInquiryDetail from './pages/AdminInquiryDetail';
 
 import { AuthProvider } from './contexts/AuthContext';
 import ParentPhoneAuth from './pages/ParentPhoneAuth';
 
 function App() {
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    setRole(localStorage.getItem('role'));
+  }, []);
+
   return (
     <AuthProvider>
       <Routes>
@@ -44,7 +49,6 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/contact/private" element={<ContactPrivate />} />
         <Route path="/contact/private/write" element={<ContactPrivateWrite />} />
-        <Route path="/contact/private/:id" element={<ContactPrivateDetail />} />
         <Route path="/contact/private/edit/:id" element={<ContactPrivateEdit />} />
         <Route path="/contact/private/:id" element={<InquiryDetail />} />
 

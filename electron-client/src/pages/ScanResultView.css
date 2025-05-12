@@ -1,0 +1,153 @@
+/* src/pages/ScanResultView.css */
+
+.result-container {
+  padding: 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  background-color: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.75rem;
+  color: #333;
+}
+
+.back-button {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin-left: auto;
+}
+
+.back-button:hover {
+  background-color: #155a9a;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  margin-top: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.result-table th, .result-table td {
+  border: 1px solid #ddd;
+  padding: 0.65rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.result-table th {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.result-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+}
+
+.loading {
+  text-align: center;
+  color: #666;
+}
+
+.summary-box {
+  background: #f7f7f7;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  color: #444;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.score-bar-wrapper {
+  width: 100%;
+  height: 20px;
+  background-color: #eee;
+  border-radius: 10px;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.score-bar {
+  height: 100%;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  color: white;
+  transition: width 0.4s ease;
+}
+
+.score-safe {
+  background-color: #4caf50;
+}
+
+.score-warning {
+  background-color: #ff9800;
+}
+
+.score-danger {
+  background-color: #f44336;
+}
+
+.gauge-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.gauge {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #4caf50 var(--degree),
+    #ddd var(--degree)
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.gauge::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: #fff;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.gauge span {
+  position: absolute;
+  z-index: 2;
+  font-size: 1.1rem;
+}

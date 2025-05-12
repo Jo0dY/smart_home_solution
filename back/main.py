@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import Base, engine
-from routers import user, notice, inquiry
+from routers import user, notice, inquiry, device
 from dotenv import load_dotenv
 from routers import admin_inquiry  # 새로 추가
+from routers import scan
+
 import os
 
 # ✅ .env 파일 로딩 경로 지정
@@ -12,6 +14,8 @@ env_path = os.path.join(BASE_DIR, ".env")
 print("📂 .env path:", env_path)
 
 load_dotenv(dotenv_path=env_path)
+
+
 
 # ✅ 환경변수 확인 로그
 print("🔎 FRONTEND_URLS =", os.getenv("FRONTEND_URLS"))
@@ -50,3 +54,7 @@ app.include_router(user.router, prefix="/api/v1/users", tags=["User"])
 app.include_router(notice.router, prefix="/api/v1/notice", tags=["Notice"])
 app.include_router(inquiry.router, prefix="/api/v1", tags=["문의하기"])
 app.include_router(admin_inquiry.router, prefix="/api/v1/admin/inquiry")
+# ✅ 일관된 라우터 등록
+app.include_router(scan.router, prefix="/api/v1/scan", tags=["Scan"])
+app.include_router(device.router, prefix="/api/v1/devices", tags=["Devices"])
+

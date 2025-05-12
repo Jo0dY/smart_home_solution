@@ -1,4 +1,5 @@
-from fastapi import Depends, HTTPException, Request
+from fastapi import Depends, HTTPException, Request,status
+from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 from database import get_db
@@ -8,6 +9,9 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/users/login")
+
 
 # ✅ 환경 변수 로드
 SECRET_KEY = os.getenv("SECRET_KEY")

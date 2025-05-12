@@ -1,0 +1,108 @@
+/* ConnectDevice.css */
+.connect-device-container {
+    flex: 1; /* 전체 영역을 채우게 */
+    padding-top: 120px;
+    text-align: center;
+    font-family: 'Pretendard', sans-serif;
+    background-color: #fcfdf7;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ⭐ 중앙 정렬 */
+  }  
+  
+  .steps {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .step {
+    background-color: #eef5e9;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #388e3c;
+  }
+  
+  .start-btn {
+    padding: 16px 28px;
+    font-size: 18px;
+    background-color: #66bb6a;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+  }  
+  
+  .start-btn:hover {
+    background-color: #4caf50;
+  }  
+  
+  .device-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+  }
+  
+  .device-form label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #2e7d32;
+  }
+  
+  .device-form input {
+    padding: 14px;
+    border: 1.5px solid #c8e6c9;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.3s;
+  }
+  
+  .device-form input:focus {
+    border-color: #81c784;
+  }
+  
+  .device-form button {
+    padding: 14px;
+    background-color: #66bb6a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .device-form button:hover {
+    background-color: #4caf50;
+  }  
+
+  .device-modal input,
+.device-modal select {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid #c8e6c9;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.device-modal input:focus,
+.device-modal select:focus {
+  border-color: #81c784;
+}
+
+.layout {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+  }
+  

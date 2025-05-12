@@ -16,16 +16,13 @@ function Login() {
   useEffect(() => {
     const savedEmail = localStorage.getItem('remembered_email');
     if (savedEmail) {
-      setEmail(savedEmail);         // ✅ 이메일 인풋 채워줌
-      setRememberEmail(true);       // ✅ 체크박스도 체크
+      setEmail(savedEmail);
+      setRememberEmail(true);
     }
   }, []);
-  
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-
 
     if (!validateEmail(email)) {
       alert('유효한 이메일 형식을 입력해주세요.');
@@ -45,10 +42,12 @@ function Login() {
       );
 
       const { user_id, email: userEmail, role } = res.data;
-      // localStorage에 민감한 정보 저장 ❌
-      login({ email: userEmail, user_id, role }); // Context에만 저장
 
-      // 오직 아이디 저장 체크만 localStorage 사용
+      login({ email: userEmail, user_id, role });
+
+      // ✅ role을 반드시 localStorage에 저장!
+      localStorage.setItem('role', role);
+
       if (rememberEmail) {
         localStorage.setItem('remembered_email', userEmail);
       } else {
@@ -99,7 +98,6 @@ function Login() {
             required
           />
 
-          {/* 아이디 저장: 체크박스 왼쪽 정렬 */}
           <div className="remember-wrapper">
             <label className="remember-label">
               <input

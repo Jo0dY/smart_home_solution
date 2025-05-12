@@ -22,7 +22,7 @@ import random, smtplib, redis, os
 from email.mime.text import MIMEText
 
 router = APIRouter()
-r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+r = redis.Redis(host='localhost', port=6380, decode_responses=True)
 
 def get_db():
     db = SessionLocal()

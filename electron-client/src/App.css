@@ -224,4 +224,8 @@ body {
       height: auto;
     }
   }
-  
+  /* App.css 또는 Sidebar 스타일 파일에 추가 */
+.menu-bottom {
+  margin-top: auto;
+  padding-bottom: 20px;
+}

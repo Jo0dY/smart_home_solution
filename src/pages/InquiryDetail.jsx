@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from '../lib/axios';
 import Navbar from './Navbar';
+import { useAuth } from '../contexts/AuthContext';  // ✅ 추가
 import './InquiryDetail.css';
 
 function InquiryDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();  // ✅ 현재 로그인한 사용자 정보
 
   const [inquiry, setInquiry] = useState(null);
   const [content, setContent] = useState('');
@@ -17,8 +19,7 @@ function InquiryDetail() {
       .then(res => {
         setInquiry(res.data);
         setContent(res.data.content);
-        const loggedInEmail = localStorage.getItem('email');
-        if (loggedInEmail && loggedInEmail === res.data.email) {
+        if (user?.email === res.data.email) {
           setIsAuthor(true);
         }
       })
@@ -27,7 +28,7 @@ function InquiryDetail() {
         alert("문의글을 불러올 수 없습니다.");
         navigate('/');
       });
-  }, [id, navigate]);
+  }, [id, navigate, user]);
 
   const handleUpdate = () => {
     if (!content.trim()) return alert("내용을 입력해주세요.");
@@ -72,7 +73,6 @@ function InquiryDetail() {
           <p><strong>작성자:</strong> {inquiry.name} ({inquiry.email})</p>
           <p><strong>작성일:</strong> {new Date(inquiry.created_at).toLocaleString('ko-KR')}</p>
 
-          <p><strong></strong></p>
           <textarea
             className="user-readonly-textarea"
             value={content}

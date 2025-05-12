@@ -101,7 +101,7 @@ function SignupPage() {
     const business_number = `${biz1}-${biz2}-${biz3}`;
 
     const formData = {
-      member_type: memberType === 'company' ? '개인사업자' : '개인회원',
+      member_type: memberType,  // ✅ 그대로 'company' 또는 'personal'로 전달
       email: email.trim(),
       password,
       name: name.trim(),

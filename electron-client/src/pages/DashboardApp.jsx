@@ -1,32 +1,31 @@
 // src/pages/DashboardApp.jsx
 import React, { useState, useEffect } from "react";
-import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import "../App.css";
 
-// 이미지 경로
 import homeIcon from "/icons/home.png";
 import profileIcon from "/icons/profile.png";
 import reportIcon from "/icons/report.png";
+import logoutIcon from "/icons/logout.png";
 import avatarImage from "/icons/profile_jibom.png";
 import jibomUmbImage from "/icons/jibom_umb_off.png";
 import flowerImage from "/icons/main_flower.png";
 
 function DashboardApp() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  // ✅ 오늘 날짜 가져오기
-  const today = new Date().toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  const today = new Date().toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 
   useEffect(() => {
     if (!user) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [user, navigate]);
 
@@ -35,17 +34,43 @@ function DashboardApp() {
   return (
     <div className="layout">
       {/* 사이드바 */}
-      <div className="sidebar">
-        <div className="logo">jibom</div>
-        <div className="menu">
-          <div className="menu-item" onClick={() => alert("홈으로 이동")}>
-            <img src={homeIcon} alt="홈" />
+      <div
+        className="sidebar"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100vh",
+        }}
+      >
+        <div>
+          <div className="logo">jibom</div>
+          <div className="menu">
+            <div className="menu-item" onClick={() => navigate("/dashboard")}>
+              <img src={homeIcon} alt="홈" />
+            </div>
+            <div className="menu-item" onClick={() => navigate("/connect-device")}>
+              <img src={profileIcon} alt="기기 연결" />
+            </div>
+            <div className="menu-item" onClick={() => navigate("/device-list")}>
+              <img src={reportIcon} alt="리포트" />
+            </div>
           </div>
-          <div className="menu-item" onClick={() => alert("프로필 이동")}>
-            <img src={profileIcon} alt="프로필" />
-          </div>
-          <div className="menu-item" onClick={() => alert("리포트 이동")}>
-            <img src={reportIcon} alt="리포트" />
+        </div>
+        <div className="menu-bottom" style={{ padding: "1rem" }}>
+          <div
+            className="menu-item"
+            onClick={() => {
+              logout();
+              navigate("/login");
+            }}
+            style={{ display: "flex", justifyContent: "center", cursor: "pointer" }}
+          >
+            <img
+              src={logoutIcon}
+              alt="로그아웃"
+              style={{ width: "24px", height: "24px" }}
+            />
           </div>
         </div>
       </div>
@@ -58,7 +83,7 @@ function DashboardApp() {
             <img src={avatarImage} alt="User Avatar" className="avatar" />
             <div className="user-info">
               <h2>지봄이님, 안녕하세요!</h2>
-              <p>{today}</p> {/* ✅ 자동 날짜 표시 */}
+              <p>{today}</p>
             </div>
           </div>
         </div>
@@ -68,7 +93,9 @@ function DashboardApp() {
           <div className="left-group">
             <div className="row">
               <div className="tile small orange">대시보드 사용방법</div>
-              <div className="tile small orange">IoT 기기연결</div>
+              <div className="tile small orange" onClick={() => navigate("/connect-device")}>
+                IoT 기기연결
+              </div>
               <div className="tile small orange">최신 업데이트</div>
             </div>
 
@@ -84,7 +111,9 @@ function DashboardApp() {
             </div>
 
             <div className="row">
-              <div className="tile small green">취약점 분석</div>
+              <div className="tile small green" onClick={() => navigate("/device-list")}>
+                취약점 분석
+              </div>
               <div className="tile small green">AI 실시간 이상탐지</div>
               <div className="tile small green">보안 리포트 분석</div>
             </div>
