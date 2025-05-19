@@ -6,21 +6,27 @@ import './DeviceModal.css';
 function DeviceModal({ onClose }) {
   const [name, setName] = useState('');
   const [type, setType] = useState('');
-  // const [status, setStatus] = useState('정상'); // ❌ 사용하지 않으므로 제거
+  const [ip, setIp] = useState('');
+  const [ssid, setSsid] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // ✅ ip 하드코딩 추가
       await axios.post('/devices', {
         name,
         type,
-        ip: '127.0.0.1', // 고정값 임시 등록
+        ip,
+        ssid,
+        password,
       });
 
-      alert('✅ 기기 등록 완료!');
+      alert('✅ 기기 등록 및 Wi-Fi 연결 성공!');
       setName('');
       setType('');
+      setIp('');
+      setSsid('');
+      setPassword('');
       onClose(); // 모달 닫기
     } catch (err) {
       console.error('❌ 등록 실패:', err);
@@ -54,6 +60,31 @@ function DeviceModal({ onClose }) {
             <option value="스마트 도어락">스마트 도어락</option>
             <option value="스마트 홈캠">스마트 홈캠</option>
           </select>
+
+          <label htmlFor="device-ip">기기 IP 주소</label>
+          <input
+            id="device-ip"
+            value={ip}
+            onChange={(e) => setIp(e.target.value)}
+            required
+          />
+
+          <label htmlFor="ssid">Wi-Fi SSID</label>
+          <input
+            id="ssid"
+            value={ssid}
+            onChange={(e) => setSsid(e.target.value)}
+            required
+          />
+
+          <label htmlFor="password">Wi-Fi 비밀번호</label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
           <div className="button-group">
             <button type="submit" className="btn-confirm">등록</button>

@@ -1,14 +1,17 @@
 /* ConnectDevice.css */
 .connect-device-container {
-    flex: 1; /* 전체 영역을 채우게 */
-    padding-top: 120px;
-    text-align: center;
-    font-family: 'Pretendard', sans-serif;
-    background-color: #fcfdf7;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* ⭐ 중앙 정렬 */
-  }  
+  flex: 1;
+  padding-top: 120px;
+  font-family: 'Pretendard', sans-serif;
+  background-color: #fcfdf7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;           /* ✅ 전체 너비 허용 */
+  max-width: 1200px;     /* ✅ 최대 폭 설정 */
+  margin: 0 auto;        /* ✅ 가운데 정렬 */
+  box-sizing: border-box;
+} 
   
   .steps {
     display: flex;
@@ -68,7 +71,8 @@
   }
   
   .device-form button {
-    padding: 14px;
+    padding: 20px;
+
     background-color: #66bb6a;
     color: white;
     border: none;
@@ -105,4 +109,68 @@
     height: 100vh;
     width: 100%;
   }
-  
+
+.device-list {
+  margin-top: 2rem;
+  padding: 1rem;
+  width: 100%;
+  max-width: 1000px;        /* ✅ 테이블보다 조금 작게 */
+  margin-left: auto;
+  margin-right: auto;       /* ✅ 가운데 정렬 */
+  border-top: 1px solid #ccc;
+}
+
+
+.device-list ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.device-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.delete-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #e43d3f;
+}
+
+.device-table {
+  width: 100%;
+  max-width: none;          /* ✅ 제한 해제 */
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 16px;
+}
+
+.device-table th,
+.device-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.device-table th {
+  background-color: #f1f8e9;
+  color: #33691e;
+  font-weight: bold;
+}
+
+.no-device-message {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  margin: 2rem 0;
+}

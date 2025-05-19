@@ -1,153 +1,100 @@
-/* src/pages/ScanResultView.css */
-
-.result-container {
-  padding: 1.5rem;
-  max-width: 720px;
-  margin: 0 auto;
-  font-family: 'Arial', sans-serif;
-  background-color: #fefefe;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+.scan-page {
+  display: flex;
+  font-family: 'Pretendard', sans-serif;
+  background-color: #fefef7;
+  min-height: 100vh;
 }
 
-h2 {
-  margin-bottom: 1rem;
-  text-align: center;
-  font-size: 1.75rem;
-  color: #333;
+.scan-content {
+  flex: 1;
+  padding: 2rem;
+  margin-left: 100px; /* 사이드바 공간 */
 }
 
+/* 🔙 뒤로가기 버튼 */
 .back-button {
-  background-color: #1976d2;
-  color: white;
+  margin-bottom: 1rem;
+  background-color: #81c784;
   border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
   cursor: pointer;
-  margin-bottom: 1.2rem;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  display: block;
-  margin-left: auto;
+  transition: background-color 0.2s;
+  margin-left: -130px;
+  margin-top: -15px;
 }
-
 .back-button:hover {
-  background-color: #155a9a;
+  background-color: #b5d8a1;
 }
 
-.result-table {
-  width: 100%;
-  border-collapse: collapse;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  margin-top: 1rem;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.result-table th, .result-table td {
-  border: 1px solid #ddd;
-  padding: 0.65rem;
+/* 제목 가운데 정렬 */
+.centered-title {
   text-align: center;
-  font-size: 0.9rem;
-}
-
-.result-table th {
-  background-color: #f9f9f9;
-  color: #333;
-}
-
-.result-table tr:nth-child(even) {
-  background-color: #fafafa;
-}
-
-.error {
-  color: red;
-  text-align: center;
+  font-size: 24px;
   font-weight: bold;
+  margin-top: 1rem; /* ← 기존에 3rem 이상이었다면 줄이기 */
+  margin-bottom: 2rem;
+  margin-left: -100px;
 }
 
-.loading {
-  text-align: center;
-  color: #666;
+.graph-area {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.graph-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  height: 280px;
+  margin-bottom: 2rem;
+  margin-left: -80px;
+}
+
+
+.checklist-box {
+  background: #ffffff;
+  padding: 1.2rem 1.6rem;
+  border-radius: 20px;
+  min-width: 250px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-left: 100px;
+}
+
+.checklist-box h4 {
+  margin-bottom: 12px;
+}
+
+.checklist-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checklist-box li {
+  margin-bottom: 10px;
+  font-size: 15px;
 }
 
 .summary-box {
-  background: #f7f7f7;
-  padding: 1rem;
-  border-radius: 10px;
-  margin-top: 1.2rem;
-  font-size: 0.9rem;
-  color: #444;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-
-.score-bar-wrapper {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
   width: 100%;
-  height: 20px;
-  background-color: #eee;
-  border-radius: 10px;
-  margin: 1rem 0;
-  overflow: hidden;
+  height: 80px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-left: -65px;
 }
-
-.score-bar {
-  height: 100%;
-  text-align: center;
-  line-height: 20px;
-  font-weight: bold;
-  color: white;
-  transition: width 0.4s ease;
-}
-
-.score-safe {
-  background-color: #4caf50;
-}
-
-.score-warning {
-  background-color: #ff9800;
-}
-
-.score-danger {
-  background-color: #f44336;
-}
-
-.gauge-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1.5rem 0;
-}
-
-.gauge {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: conic-gradient(
-    #4caf50 var(--degree),
-    #ddd var(--degree)
-  );
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-  position: relative;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-}
-
-.gauge::after {
-  content: "";
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  background: #fff;
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.gauge span {
-  position: absolute;
-  z-index: 2;
-  font-size: 1.1rem;
+.scan-content {
+  margin-left: 100px; /* ✅ 사이드바 공간 확보 필수! */
 }

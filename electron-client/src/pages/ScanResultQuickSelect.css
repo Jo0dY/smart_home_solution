@@ -1,31 +1,116 @@
-/* src/pages/ScanResultQuickSelect.css */
+.scan-page {
+  display: flex;
+  font-family: 'Pretendard', sans-serif;
+  background-color: #fefef7;
+  min-height: 100vh;
+}
 
-.quick-select-container {
-  max-width: 500px;
-  margin: 5rem auto;
-  padding: 2rem;
-  background: white;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+/* ✅ 사이드바 스타일 */
+.sidebar {
+  background-color: #dce9c6;
+  width: 100px;
+}
+
+.sidebar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 1rem;
+  color: #000;
+}
+
+.sidebar .menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-top: 1rem;
+}
+
+.sidebar .menu-item {
+  cursor: pointer;
+  padding: 8px;
+  transition: background-color 0.2s;
+}
+.sidebar .menu-item:hover {
+  background-color: #e3f2fd;
+  border-radius: 8px;
+}
+
+.menu-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+/* ✅ 본문 */
+.quick-wrapper {
+  flex: 1;
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quick-card {
+  background-color: #ffffff;
+  padding: 5rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 400px;
   text-align: center;
 }
 
-.quick-select-container h2 {
-  margin-bottom: 1.5rem;
+.quick-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 6rem;
 }
 
-.quick-select-container button {
-  margin: 0.5rem;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border: none;
+.quick-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.quick-btn {
+  padding: 14px;
+  font-size: 16px;
   border-radius: 8px;
-  background-color: #1976d2;
-  color: white;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  font-weight: bold;
+  transition: 0.2s;
+  width: 100%;
 }
 
-.quick-select-container button:hover {
-  background-color: #125ea8;
+.quick-btn.primary {
+  background-color: #81c784;
+  color: white;
+  border: none;
+}
+.quick-btn.primary:hover {
+  background-color: #a7d078;
+}
+
+.quick-btn.outline {
+  background-color: transparent;
+  color: #000000;
+  border: 2px solid #81c784;
+}
+.quick-btn.outline:hover {
+  background-color: #e3f2fd;
+}
+
+/* ✅ 뒤로가기 버튼 */
+.quick-back {
+  position: absolute;
+  left: 8rem;
+  top: 3rem;
+  background-color: #81c784;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.quick-back:hover {
+  background-color: #c2da9b;
 }

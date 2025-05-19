@@ -1,66 +1,119 @@
-/* src/pages/ScanHistoryView.css */
+/* ScanHistoryView.css */
 
-.history-container {
-  max-width: 700px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #fdfdf5;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+.scan-page {
+  display: flex;
+  background-color: #fefef7;
+  min-height: 100vh;
   font-family: 'Pretendard', sans-serif;
 }
 
-h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+.sidebar {
+  width: 80px;
+  background-color: #dce8c9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
 }
 
-.back-button {
-  background-color: #789262;
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.menu-item {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.menu-item:hover {
+  transform: scale(1.1);
+}
+
+.scan-content {
+  flex: 1;
+  padding: 3rem 4rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.centered-title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  flex-grow: 1;
+  margin-left: -110px;
+  margin-top: 50px;
+
+}
+
+.history-back-button {
+  background-color: #81c784;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: -125px;
+  margin-top: -80px;
+}
+
+.scan-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
-  margin-bottom: 20px;
+  overflow: hidden;
+  margin-left: -50px;
+}
+
+.scan-table th,
+.scan-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.scan-table th {
+  background-color: #eef5e9;
+  color: #333;
+}
+
+.detail-btn {
+  background-color: #388e3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
-.back-button:hover {
-  background-color: #5f774f;
+.detail-btn:hover {
+  background-color: #2e7d32;
 }
 
-.history-card {
-  display: flex;
-  align-items: center;
-  background: white;
-  border-radius: 12px;
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.score-circle {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: #efefef;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 18px;
-  color: #444;
-  margin-right: 20px;
-}
-
-.history-info p {
-  margin: 4px 0;
-  color: #444;
-}
-
-.empty {
+.empty-message {
+  padding: 2rem;
   text-align: center;
-  margin-top: 30px;
-  color: #777;
+  font-size: 16px;
+  color: #666;
 }

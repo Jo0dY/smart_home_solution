@@ -8,8 +8,13 @@ const instance = axios.create({
   },
 });
 
-// ✅ 요청 경로 콘솔 출력
+// ✅ 요청 경로 + Authorization 자동 처리
 instance.interceptors.request.use((config) => {
+  const token = localStorage.getItem('accessToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
   console.log('👉 [요청 URL]', config.method?.toUpperCase(), config.baseURL + config.url);
   return config;
 });

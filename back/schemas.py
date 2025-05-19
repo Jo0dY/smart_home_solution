@@ -1,5 +1,5 @@
-from pydantic import BaseModel, EmailStr, ConfigDict
-from typing import Optional
+from pydantic import BaseModel, EmailStr, ConfigDict, constr, IPvAnyAddress
+from typing import Optional, List
 from datetime import date, datetime
 
 # -------------------- 🔐 사용자 인증 관련 --------------------
@@ -114,10 +114,11 @@ class InquiryAnswer(BaseModel):
 # -------------------- 📱 IoT 기기 등록 --------------------
 
 class DeviceCreate(BaseModel):
-    name: str
-    type: str
-    ip: str
-
+    name: constr(min_length=1, max_length=50)
+    type: constr(min_length=1, max_length=30)
+    ip: IPvAnyAddress
+    ssid: constr(min_length=1, max_length=32)
+    password: constr(min_length=8, max_length=64)
 
 class DeviceOut(BaseModel):
     id: int
@@ -128,3 +129,5 @@ class DeviceOut(BaseModel):
     registered_at: Optional[datetime] = None
 
     model_config = ConfigDict(from_attributes=True)
+
+
